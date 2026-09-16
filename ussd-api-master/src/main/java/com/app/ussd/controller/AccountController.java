@@ -68,7 +68,6 @@ public class AccountController  {
 			 
 		return accountService.FindAll();
 	}
-
 	
 	//Delete
 	@DeleteMapping(value = "/account/delete/{id}")
