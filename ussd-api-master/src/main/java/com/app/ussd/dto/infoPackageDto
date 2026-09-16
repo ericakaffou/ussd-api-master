@@ -1,0 +1,2 @@
+Pas de fonction de Mappage DTO ->Objet  
+La seule fonction de mappage Utile et nécessaire est //Mapping de Objet -> Dto : fait dans package model.
