@@ -1,6 +1,5 @@
 package com.app.ussd.controller;
 import java.util.List;
-
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
