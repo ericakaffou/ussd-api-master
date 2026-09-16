@@ -3,6 +3,7 @@ def buildNum = env.BUILD_NUMBER
 def branchName= env.BRANCH_NAME
 
 
+
 properties([
     gitLabConnection('your-gitlab-connection-name'),
     pipelineTriggers([
