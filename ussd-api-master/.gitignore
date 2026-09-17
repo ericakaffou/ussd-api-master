@@ -4,6 +4,7 @@ bin/
 .env
 .github/
 scripts/
+github/
 
 ### STS ###
 .apt_generated
