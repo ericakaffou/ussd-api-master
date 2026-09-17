@@ -1,5 +1,5 @@
 Write-Host "=========================================="
-Write-Host "  Clonage du projet USSD API"
+Write-Host "  Clonage du projet "
 Write-Host "=========================================="
 
 $HOME_PATH = Get-Location
