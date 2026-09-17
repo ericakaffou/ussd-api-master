@@ -6,7 +6,7 @@ $HOME_PATH = Get-Location
 $REPO_URL = "https://github.com/ericakaffou/ussd-api-master.git"
 
 $DEST_REP = "ussd-app1"
-$DEST_PATH = "C:\Users\Eric\Desktop\OneDrive\fORMATIONS\DevOps_Projets\USSD-deploy(Gitlab-Jenkins-dockerRegistry-Ansible)\$DEST_REP\$DEST_REP"
+$DEST_PATH = "C:\Users\Eric\Desktop\OneDrive\fORMATIONS\DevOps_Projets\USSD-deploy(Gitlab-Jenkins-dockerRegistry-Ansible)\$DEST_REP"
 #$COMMIT_MSG = "scriptCommit-" + (Get-Date -Format "dddd_MM-dd-yyyy_HH:mm K")
 $COMMIT_MSG = "scriptCommit-$(Get-Date -Format 'MM-dd-yyyy_HH:mm K')"
 
@@ -85,7 +85,6 @@ if (-not (Test-Path $DEST_PATH)) {
     New-Item $DEST_PATH -ItemType Directory | Out-Null
 }
 
-$DEST_PATH = "C:\Users\Eric\Desktop\OneDrive\fORMATIONS\DevOps_Projets\USSD-deploy(Gitlab-Jenkins-dockerRegistry-Ansible)\$DEST_REP"
 # ==========================================
 # Copie SANS le dossier .git
 # ==========================================
@@ -94,6 +93,8 @@ Write-Host ""
 Write-Host "Copie du projet sans le depot Git..."
 
 robocopy $DEST_REP"_tmp" $DEST_PATH /E
+
+$DEST_PATH = "C:\Users\Eric\Desktop\OneDrive\fORMATIONS\DevOps_Projets\USSD-deploy(Gitlab-Jenkins-dockerRegistry-Ansible)\$DEST_REP\$DEST_REP"
 
 # enlève les attributs caché/système/lecture seule
 
