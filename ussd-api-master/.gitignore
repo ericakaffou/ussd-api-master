@@ -3,7 +3,7 @@ target/
 bin/
 .env
 .github/
-.push_gitlab.ps1
+.ps1
 
 ### STS ###
 .apt_generated
