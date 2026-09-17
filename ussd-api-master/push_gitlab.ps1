@@ -97,11 +97,14 @@ robocopy $DEST_REP"_tmp" $DEST_PATH /E
 # enlève les attributs caché/système/lecture seule
 
 attrib -H -S -R "$DEST_PATH\.git" /S /D
+attrib -H -S -R "$DEST_PATH\.github" /S /D
 
 Write-Host ""
-Write-Host "Suppression du depot Git..."
+Write-Host "Suppression du depot Git  et du dossier .github..."
 
 Remove-Item "$DEST_PATH\.git" -Recurse -Force
+
+Remove-Item "$DEST_PATH\.github" -Recurse -Force
 
 if (Test-Path "$DEST_PATH\.git") {
 
@@ -110,6 +113,12 @@ if (Test-Path "$DEST_PATH\.git") {
     Remove-Item "$DEST_PATH\.git" -Recurse -Force
 }
 
+if (Test-Path "$DEST_PATH\.github") {
+
+    Write-Host "Suppression du dossier .github..."
+
+    Remove-Item "$DEST_PATH\.github" -Recurse -Force
+}
 # Robocopy retourne plusieurs codes consideres comme normaux.
 if ($LASTEXITCODE -ge 8) {
 
