@@ -5,6 +5,7 @@ bin/
 .github/
 .push_gitlab.ps1
 
+
 ### STS ###
 .apt_generated
 .classpath
