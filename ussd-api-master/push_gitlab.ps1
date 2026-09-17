@@ -85,6 +85,7 @@ if (-not (Test-Path $DEST_PATH)) {
     New-Item $DEST_PATH -ItemType Directory | Out-Null
 }
 
+$DEST_PATH = "C:\Users\Eric\Desktop\OneDrive\fORMATIONS\DevOps_Projets\USSD-deploy(Gitlab-Jenkins-dockerRegistry-Ansible)\$DEST_REP"
 # ==========================================
 # Copie SANS le dossier .git
 # ==========================================
