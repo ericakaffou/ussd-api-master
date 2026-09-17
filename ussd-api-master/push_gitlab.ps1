@@ -6,7 +6,7 @@ $HOME_PATH = Get-Location
 $REPO_URL = "https://github.com/ericakaffou/ussd-api-master.git"
 
 $DEST_REP = "ussd-app1"
-$DEST_PATH = "C:\Users\Eric\Desktop\OneDrive\fORMATIONS\DevOps_Projets\USSD-deploy(Gitlab-Jenkins-dockerRegistry-Ansible)\$DEST_REP"
+$DEST_PATH = "C:\Users\Eric\Desktop\OneDrive\fORMATIONS\DevOps_Projets\USSD-deploy(Gitlab-Jenkins-dockerRegistry-Ansible)\$DEST_REP\$DEST_REP"
 #$COMMIT_MSG = "scriptCommit-" + (Get-Date -Format "dddd_MM-dd-yyyy_HH:mm K")
 $COMMIT_MSG = "scriptCommit-$(Get-Date -Format 'MM-dd-yyyy_HH:mm K')"
 
