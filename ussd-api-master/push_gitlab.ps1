@@ -139,7 +139,7 @@ Write-Host $DEST_PATH
 Set-Location $DEST_PATH
 
 # ==========================================
-# Push vers la repository local gitlab
+# Push vers la repository local gitlab 
 # ==========================================
 Write-Host "=========================================="
 Write-Host "  Push vers la repository local gitlab "
