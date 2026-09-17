@@ -6,7 +6,7 @@ $HOME_PATH = Get-Location
 $REPO_URL = "https://github.com/ericakaffou/ussd-api-master.git"
 
 $DEST_REP = "ussd-app1"
-$DEST_PATH = "C:\Users\Eric\Desktop\OneDrive\fORMATIONS\DevOps_Projets\USSD-deploy(Gitlab-Jenkins-dockerRegistry-Ansible)\$DEST_REP"
+$DEST_PATH = "C:\Users\Eric\Desktop\OneDrive\fORMATIONS\DevOps_Projets\USSD-deploy(Gitlab-Jenkins-dockerRegistry-Ansible)\$DEST_REP\$DEST_REP"
 #$COMMIT_MSG = "scriptCommit-" + (Get-Date -Format "dddd_MM-dd-yyyy_HH:mm K")
 $COMMIT_MSG = "scriptCommit-$(Get-Date -Format 'MM-dd-yyyy_HH:mm K')"
 
@@ -94,19 +94,14 @@ Write-Host "Copie du projet sans le depot Git..."
 
 robocopy $DEST_REP"_tmp" $DEST_PATH /E
 
-#$DEST_PATH = "C:\Users\Eric\Desktop\OneDrive\fORMATIONS\DevOps_Projets\USSD-deploy(Gitlab-Jenkins-dockerRegistry-Ansible)\$DEST_REP\$DEST_REP"
-
 # enlève les attributs caché/système/lecture seule
 
 attrib -H -S -R "$DEST_PATH\.git" /S /D
-#attrib -H -S -R "$DEST_PATH\.github" /S /D
 
 Write-Host ""
-Write-Host "Suppression du depot Git  et du dossier .github..."
+Write-Host "Suppression du depot Git..."
 
 Remove-Item "$DEST_PATH\.git" -Recurse -Force
-
-#Remove-Item "$DEST_PATH\.github" -Recurse -Force
 
 if (Test-Path "$DEST_PATH\.git") {
 
@@ -115,12 +110,6 @@ if (Test-Path "$DEST_PATH\.git") {
     Remove-Item "$DEST_PATH\.git" -Recurse -Force
 }
 
-#if (Test-Path "$DEST_PATH\.github") {
-
-#    Write-Host "Suppression du dossier .github..."
-
-#    Remove-Item "$DEST_PATH\.github" -Recurse -Force
-#}
 # Robocopy retourne plusieurs codes consideres comme normaux.
 if ($LASTEXITCODE -ge 8) {
 
@@ -140,7 +129,6 @@ Write-Host "Copie terminee."
 
 Write-Host ""
 Write-Host "Suppression du clone temporaire..."
-
 
 Remove-Item $DEST_REP"_tmp" -Recurse -Force
 
