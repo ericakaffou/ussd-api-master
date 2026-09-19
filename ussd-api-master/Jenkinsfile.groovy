@@ -60,6 +60,7 @@ node(){
 			def ipPostgres = sh returnStdout: true, script: "./generator.sh -i | grep postgrespipeline${buildNum}${branchName} | awk '{print \$1}' | tr -d '\n'" 
 
    // Récupération du dépôt git applicatif //
+   //Jenkins change de répertoire de travail lors du git checkout parce que le dépôt est cloné directement dans le workspace courant
     stage('SERVICE - Git checkout'){
       git branch: branchName, url: "http://gitlab.local/mypipeline/myapp1.git"
     }
