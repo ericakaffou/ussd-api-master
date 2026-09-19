@@ -49,8 +49,6 @@ node(){
       git "http://gitlab.local/mypipeline/generator.git"      
     }
 
-  
-
     stage('Env - run postgres'){
      // sh "sudo chmod +x -R ${env.WORKSPACE}"
       //sh "./generator.sh -p"
