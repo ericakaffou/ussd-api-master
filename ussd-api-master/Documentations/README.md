@@ -48,8 +48,7 @@ Workflow
 2 - Création du Service USSD
 
 
-
-3 - Menu et option flow  (MISS CI)
+3 - Menu et option flow  (MISS CI)   (app2)
 
  - On crée le main menu  mainMenu =true ; menuType = 0 (1)
    NB : il sera judicieux de creer tous les menus ( ecran ) avant de poursuivre.
@@ -66,11 +65,11 @@ Workflow
 
 
 
- - On creer les Options  du menu (1)
+ - On creer les Options  du menu (1)  ==> sur   (app2)
 
- - On creer les Options  du menu (2)
+ - On creer les Options  du menu (2)   ==> sur  (app2)
 
- - On creer les Options  du menu (3)
+ - On creer les Options  du menu (3)   ==>sur   (app2)
 
  - (4) ???
 
@@ -98,7 +97,7 @@ Workflow
 App 2 : ServiceClient (pilotage via API ): Creation de Menu
                                            Creation d'option
                                            Creation de services annexes liées à une option : explication ?????
-ce service va exécuter le service USSD scpécifique ( dans MeunUssdService)
+                                            ce service va exécuter le service USSD scpécifique ( dans MeunUssdService)
 
 
 
