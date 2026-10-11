@@ -97,7 +97,7 @@ Workflow
 
 App 2 : ServiceClient (pilotage via API ): Creation de Menu
                                            Creation d'option
-                                           Creation de services annexes liées à une option
+                                           Creation de services annexes liées à une option : explication ?????
 ce service va exécuter le service USSD scpécifique ( dans MeunUssdService)
 
 
