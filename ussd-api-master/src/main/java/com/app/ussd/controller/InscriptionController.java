@@ -1,9 +1,18 @@
+/* 
+Ce controller sert pour les inscriptions/creations de nouveau compte
+Il fait appelle au service acconutService qui crée un compte dont les acces du admin sont l'email fournit
+et le mot de passe fournit !!!
+
+NB : l'url doit peut etre configurée comme AuthenticationController cad 
+
+*/
 package com.app.ussd.controller;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.app.ussd.dto.AccountDto;
 import com.app.ussd.service.AccountService;
@@ -16,6 +25,7 @@ import io.swagger.annotations.ApiResponses;
 //OK---check
 @CrossOrigin("*")
 @Api("/inscriptionController")
+@RequestMapping("${app.root.url}")
 @RestController
 
 public class InscriptionController  {
