@@ -81,16 +81,13 @@
             <artifactId>springfox-boot-starter</artifactId>
             <version>3.0.0</version>
         </dependency>
-     <!-- End For swagger-->    
-
-	 <!-- database drivers-->  
-	    <!-- mysql drivers-->         
+     <!-- End For swagger-->        
 		 <dependency>
         <groupId>mysql</groupId>
         	<artifactId>mysql-connector-java</artifactId>
         	<version>8.0.14</version>
     	</dependency>
-		<!-- postgresql drivers-->  
+
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
