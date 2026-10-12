@@ -24,9 +24,9 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @CrossOrigin("*")
-@Api("${app.root.url}" +"/account")
+@Api(tags = "Account")
 @RestController
-@RequestMapping("${app.root.url}")
+@RequestMapping("${app.root.url}" +"/account")
 public class AccountController  {
 	
 	
@@ -40,7 +40,7 @@ public class AccountController  {
 	}
 
 	//Save &Edit
-	@PostMapping(value = "/account/" , consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE )
+	@PostMapping(value = "/" , consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE )
 	@ApiOperation(value = "Enregistrer Ou Modifier un Account" , notes = "cette methode permet d'enregistrer  Ou Modifier  un Account" , response = AccountDto.class) 
 	@ApiResponses(value = {
 			 @ApiResponse(code = 200 , message = "l'objet Account Cree/Modifié "),
@@ -51,7 +51,7 @@ public class AccountController  {
 	}
 
 	//FindById
-	@GetMapping(value = "/account/{id}" , produces = MediaType.APPLICATION_JSON_VALUE )
+	@GetMapping(value = "/{id}" , produces = MediaType.APPLICATION_JSON_VALUE )
 	@ApiOperation(value = "Rechercher un Account" , notes = "cette methode permet de chercher un Account par son id" , response = AccountDto.class) 
 	@ApiResponses(value = {
 			 @ApiResponse(code = 200 , message = "l'objet Account trouvé dans la BDD"),
@@ -62,7 +62,7 @@ public class AccountController  {
 	}
 
 	//ListAll
-	@GetMapping(value = "/accounts/" ,  produces = MediaType.APPLICATION_JSON_VALUE )
+	@GetMapping(value = "/" ,  produces = MediaType.APPLICATION_JSON_VALUE )
 	@ApiOperation(value = "Renvoi tous les  accounts" , notes = "cette methode permet de renvoyer la liste des accounts dans la BDD" , responseContainer = "AccountDto") 
 			@ApiResponses(value = {
 				@ApiResponse(code = 200 , message = "La liste des accounts / une liste vide")
@@ -73,7 +73,7 @@ public class AccountController  {
 	}
 	
 	//Delete
-	@DeleteMapping(value = "/account/delete/{id}")
+	@DeleteMapping(value = "/delete/{id}")
 	@ApiOperation(value = "Supprimer un account" , notes = "cette methode permet de supprimer un account par son ID" ) 
 	@ApiResponses(value = {
 			 @ApiResponse(code = 200 , message = "l'objet Account a ete supprimé dans la BDD")

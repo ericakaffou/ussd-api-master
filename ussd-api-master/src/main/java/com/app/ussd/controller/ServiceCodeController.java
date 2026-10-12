@@ -1,3 +1,6 @@
+/*
+Controlleur Standard (CRUD)
+*/
 package com.app.ussd.controller;
 
 import java.util.List;
@@ -24,9 +27,9 @@ import io.swagger.annotations.ApiResponses;
 
 //OK---check
 @CrossOrigin("*")
-@Api("${app.root.url}" +"/scode")
+@Api(tags ="ServiceCode")
 @RestController
-@RequestMapping("${app.root.url}")
+@RequestMapping("${app.root.url}" +"/scode")
 public class ServiceCodeController {
 	
 	   private final ServiceCodeService scService;	
@@ -39,7 +42,7 @@ public class ServiceCodeController {
 
 	  //Save
 	  @PreAuthorize("hasAuthority('ADMIN')")
-	  @PostMapping(value ="/scode/" , consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE )
+	  @PostMapping(value ="/" , consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE )
 	  @ApiOperation(value = "Enregistrer Ou Modifier un Service Code" , notes = "cette methode permet d'enregistrer Ou Modifier un Service Code" , response = ServiceCodeDto.class) 
 	  @ApiResponses(value = {
 				 @ApiResponse(code = 200 , message = "l'objet ServiceCode cree/Modifié "),
@@ -50,7 +53,7 @@ public class ServiceCodeController {
 		}
 	  
 	  	//FindById
-		@GetMapping(value ="/scode/{id}" , produces = MediaType.APPLICATION_JSON_VALUE )
+		@GetMapping(value ="/{id}" , produces = MediaType.APPLICATION_JSON_VALUE )
 		@ApiOperation(value = "Rechercher un Service Code" , notes = "cette methode permet de chercher un Service Code par son id" , response = ServiceCodeDto.class) 
 		@ApiResponses(value = {
 				 @ApiResponse(code = 200 , message = "l'objet ServiceCode trouvé dans la BDD"),
@@ -61,7 +64,7 @@ public class ServiceCodeController {
 		}
 		
 		//ListAll
-		@GetMapping(value ="/scodes/" ,  produces = MediaType.APPLICATION_JSON_VALUE )
+		@GetMapping(value ="/" ,  produces = MediaType.APPLICATION_JSON_VALUE )
 		@ApiOperation(value = "Renvoi tous les  Service Code" , notes = "cette methode permet de renvoyer la liste des Service Code" , responseContainer = "ServiceCodeDto") 
 				@ApiResponses(value = {
 					@ApiResponse(code = 200 , message = "La liste des Service Code / une liste vide")
@@ -73,7 +76,7 @@ public class ServiceCodeController {
 		
 		//Delete
 		@PreAuthorize("hasAuthority('ADMIN')")
-		@DeleteMapping(value ="/scode/delete/{id}")
+		@DeleteMapping(value ="/delete/{id}")
 		@ApiOperation(value = "Supprimer un Service Code" , notes = "cette methode permet de supprimer un Service Code par son ID" ) 
 		@ApiResponses(value = {
 				 @ApiResponse(code = 200 , message = "le Service Code a ete supprimé dans la BDD")

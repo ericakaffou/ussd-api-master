@@ -1,3 +1,6 @@
+/*
+Controlleur Standard (CRUD)
+*/
 package com.app.ussd.controller;
 import java.util.List;
 import org.springframework.http.MediaType;
@@ -20,8 +23,8 @@ import io.swagger.annotations.ApiResponses;
 
 @CrossOrigin("*")
 @RestController
-@Api("${app.root.url}" +"/mno")
-@RequestMapping("${app.root.url}")
+@Api(tags ="Operateur_mobile" )
+@RequestMapping("${app.root.url}"+"/mno")
 public class MnoController {
 	
    private  final MnoService mnoService;	
@@ -33,7 +36,7 @@ public class MnoController {
 }
 
 	  //Save
-	  @PostMapping(value ="/mno/" , consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE )
+	  @PostMapping(value ="/" , consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE )
 		@ApiOperation(value = "Enregistrer Ou Modifier un Operateur mobil" , notes = "cette methode permet d'enregistrer Ou Modifier un Operateur mobil" , response = MnoDto.class) 
 		@ApiResponses(value = {
 				 @ApiResponse(code = 200 , message = "l' Operateur mobil cree/Modifié "),
@@ -44,7 +47,7 @@ public class MnoController {
 		}
 	  
 	  	//FindById
-		@GetMapping(value ="/mno/{id}" , produces = MediaType.APPLICATION_JSON_VALUE )
+		@GetMapping(value ="/{id}" , produces = MediaType.APPLICATION_JSON_VALUE )
 		@ApiOperation(value = "Rechercher un Operateur mobil" , notes = "cette methode permet de chercher un Operateur mobil par son id" , response = MnoDto.class) 
 		@ApiResponses(value = {
 				 @ApiResponse(code = 200 , message = "l'objet Operateur mobil trouvé dans la BDD"),
@@ -55,7 +58,7 @@ public class MnoController {
 		}
 		
 		//ListAll
-		@GetMapping(value ="/mnos/" ,  produces = MediaType.APPLICATION_JSON_VALUE )
+		@GetMapping(value ="/" ,  produces = MediaType.APPLICATION_JSON_VALUE )
 		@ApiOperation(value = "Renvoi tous les  Operateurs mobils" , notes = "cette methode permet de renvoyer la liste des Operateurs mobils enregistrés" , responseContainer = "MnoDto") 
 				@ApiResponses(value = {
 					@ApiResponse(code = 200 , message = "La liste des Operateurs mobiles  / une liste vide")
@@ -66,7 +69,7 @@ public class MnoController {
 		}
 		
 		//Delete
-		@DeleteMapping(value ="/mno/delete/{id}")
+		@DeleteMapping(value ="/delete/{id}")
 		@ApiOperation(value = "Supprimer un Operateur mobil" , notes = "cette methode permet de supprimer un Operateur mobil par son ID" ) 
 		@ApiResponses(value = {
 				 @ApiResponse(code = 200 , message = "l' Operateur mobil a ete supprimé dans la BDD")

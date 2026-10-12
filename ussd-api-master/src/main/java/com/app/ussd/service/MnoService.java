@@ -1,3 +1,7 @@
+/*
+Service Standard (CRUD)
+*/
+
 package com.app.ussd.service;
 
 import java.util.ArrayList;
@@ -50,7 +54,7 @@ public class MnoService {
 		    scRegMno.setMnoName(dto.getMnoName());
 		    scRegMno.setMnc(dto.getMnc());
 		    scRegMno.setMcc(dto.getMcc());
-			return  Mno.toDto(mnoRepo.save(scRegMno));		    
+			return  this.toDto(mnoRepo.save(scRegMno));		    
 	}	
 	
 	//FindById
@@ -64,7 +68,7 @@ public class MnoService {
 					 throw new EntityNotFoundException (Constants.FAILED,ErrorCodes.MNO_NOT_FOUND);
 				}
 			 	
-			 	return 	Mno.toDto(optionalMno.get()); 
+			 	return 	this.toDto(optionalMno.get()); 
 				
 		}
 	
@@ -77,7 +81,7 @@ public class MnoService {
 				throw new EntityNotFoundException (Constants.FAILED,ErrorCodes.MNO_NOT_FOUND);			
 			}			
 			for( Mno mno : listMno ) {
-				listMnoDto.add(Mno.toDto(mno))  ;			
+				listMnoDto.add(this.toDto(mno))  ;			
 			}			
 			return listMnoDto;
 		}
@@ -97,4 +101,21 @@ public class MnoService {
 		    	
 				    		     		
 		}
+
+
+		// Mapping de Mno -> MnoDto
+		    public   MnoDto toDto(Mno mno) {
+		    	
+		    	if (mno == null) { 
+					throw new EntityNotFoundException (Constants.FAILED,ErrorCodes.MNO_NOT_FOUND);  	   		
+		    		
+		    	}
+		    	
+		    	return MnoDto.builder()
+		    			.id(mno.getId())
+		    			.mcc(mno.getMcc())
+		    			.mnc(mno.getMnc())
+		    			.mnoName(mno.getMnoName())
+		    			.build() ;
+		    }
 }

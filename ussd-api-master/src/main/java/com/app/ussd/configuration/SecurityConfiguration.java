@@ -54,7 +54,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable()) // desactivé car appli local
 			.authorizeRequests(requests -> requests.antMatchers(
-				"/**/**/auth/authenticate",
+				"/**/**/authenticate",
 				"/configuration/ui",
 				"/configuration/security",
 				"/swagger-ui/**",
@@ -63,7 +63,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 				"/v3/api-docs",
 				"/webjars/**",
 				"/swagger-ui/index.html",
-				"/inscriptionController/**").permitAll()
+				"/**/**/inscriptionController/**").permitAll()
 				.anyRequest().authenticated()).sessionManagement(management -> management
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS));		 
 		 //pour activer le flitre ApplicationRequestFilter

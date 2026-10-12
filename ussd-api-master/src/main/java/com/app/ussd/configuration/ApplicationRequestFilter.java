@@ -1,3 +1,7 @@
+/*
+Cette classe sert à intercepter toutes les requetes afin de vérifier les access (token ) de l'utilisateur
+*/
+
 package com.app.ussd.configuration;
 
 import java.io.IOException;

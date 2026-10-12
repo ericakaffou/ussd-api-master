@@ -1,3 +1,6 @@
+/*
+Controlleur Standard (CRUD)
+*/
 package com.app.ussd.controller;
 
 import java.util.List;
@@ -23,8 +26,8 @@ import io.swagger.annotations.ApiResponses;
 
 @CrossOrigin("*")
 @RestController
-@Api("${app.root.url}" +"/user")
-@RequestMapping("${app.root.url}")
+@Api(tags ="Utilisateur")
+@RequestMapping("${app.root.url}"  +"/user")
 public class UserController {
 	
 	
@@ -38,7 +41,7 @@ public class UserController {
 
 	//Save
 	//@PreAuthorize("hasRole('ADMIN')")
-	@PostMapping(value ="/user/" , consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE )
+	@PostMapping(value ="/" , consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE )
 	@ApiOperation(value = "Enregistrer  Ou Modifier un user" , notes = "cette methode permet d'enregistrer Ou Modifier  un user" , response = UserDto.class) 
 	@ApiResponses(value = {
 			 @ApiResponse(code = 200 , message = "l'objet user cree/Modifié "),
@@ -49,7 +52,7 @@ public class UserController {
 	}
 	
 	//FindById
-	@GetMapping(value = "/user/{id}" , produces = MediaType.APPLICATION_JSON_VALUE )
+	@GetMapping(value = "/{id}" , produces = MediaType.APPLICATION_JSON_VALUE )
 	@ApiOperation(value = "Rechercher un user" , notes = "cette methode permet de chercher un user par son id" , response = UserDto.class) 
 	@ApiResponses(value = {
 			 @ApiResponse(code = 200 , message = "l'objet user trouvé dans la BDD"),
@@ -60,32 +63,32 @@ public class UserController {
 	
 	
 
-		//FindAll
-		@GetMapping(value ="/users/" ,  produces = MediaType.APPLICATION_JSON_VALUE )
-		@ApiOperation(value = "Renvoi tous les  users" , notes = "cette methode permet de renvoyer la liste des users dans la BDD" , responseContainer = "UserDto") 
-		@ApiResponses(value = {
-		@ApiResponse(code = 200 , message = "La liste des User/ une liste vide")			
-		})	public List<UserDto> FindAll() {
-			return utilisateurService.FindAll();
-			}
-
-		//Delete
-		@DeleteMapping(value ="/user/delete/{id}")
-		@ApiOperation(value = "Supprimer un user" , notes = "cette methode permet de supprimer un user par son ID" ) 
-		@ApiResponses(value = {
-				 @ApiResponse(code = 200 , message = "l'objet user a ete supprimé dans la BDD")
-		})	public void delete(@PathVariable("id") Long id) throws Exception {
-			utilisateurService.Delete(id);
+	//FindAll
+	@GetMapping(value ="/" ,  produces = MediaType.APPLICATION_JSON_VALUE )
+	@ApiOperation(value = "Renvoi tous les  users" , notes = "cette methode permet de renvoyer la liste des users dans la BDD" , responseContainer = "UserDto") 
+	@ApiResponses(value = {
+	@ApiResponse(code = 200 , message = "La liste des User/ une liste vide")			
+	})	public List<UserDto> FindAll() {
+		return utilisateurService.FindAll();
 		}
-		
-		//FindByAccountId
-		@GetMapping(value ="/user/account/{id}" ,  produces = MediaType.APPLICATION_JSON_VALUE )
-		@ApiOperation(value = "Renvoi tous les  users d'un compte client" , notes = "cette methode permet de renvoyer la liste des users d'un compte client" , responseContainer = "UserDto") 
-		@ApiResponses(value = {
-		@ApiResponse(code = 200 , message = "La liste des users  d'un compte/ une liste vide")			
-		})	public List<UserDto> FindByAccountId(@PathVariable("id") Long id) {
-			return utilisateurService.FindByAccountId(id);
-			}
+
+	//Delete
+	@DeleteMapping(value ="/delete/{id}")
+	@ApiOperation(value = "Supprimer un user" , notes = "cette methode permet de supprimer un user par son ID" ) 
+	@ApiResponses(value = {
+				@ApiResponse(code = 200 , message = "l'objet user a ete supprimé dans la BDD")
+	})	public void delete(@PathVariable("id") Long id) throws Exception {
+		utilisateurService.Delete(id);
+	}
+	
+	//FindByAccountId
+	@GetMapping(value ="/account/{id}" ,  produces = MediaType.APPLICATION_JSON_VALUE )
+	@ApiOperation(value = "Renvoi tous les  users d'un compte client" , notes = "cette methode permet de renvoyer la liste des users d'un compte client" , responseContainer = "UserDto") 
+	@ApiResponses(value = {
+	@ApiResponse(code = 200 , message = "La liste des users  d'un compte/ une liste vide")			
+	})	public List<UserDto> FindByAccountId(@PathVariable("id") Long id) {
+		return utilisateurService.FindByAccountId(id);
+		}
 		
 
 }

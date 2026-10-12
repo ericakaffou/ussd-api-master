@@ -1,3 +1,6 @@
+/*
+Controlleur Standard (CRUD) : Ici la creation de session se font dans app3-operateur
+*/
 package com.app.ussd.controller;
 
 import java.util.List;
@@ -18,8 +21,8 @@ import io.swagger.annotations.ApiResponses;
 
 @CrossOrigin("*")
 @RestController
-@Api("${app.root.url}" +"/ussdSessions")
-@RequestMapping("${app.root.url}")
+@Api(tags ="UssdSession" )
+@RequestMapping("${app.root.url}"+"/ussdsession")
 public class UssdSessionController {
 	
 	 private final  UssdSessionService sessionService;	
@@ -31,7 +34,7 @@ public class UssdSessionController {
 	}
 
 			//ListAll
-			@GetMapping(value = "/ussdSessions/" ,  produces = MediaType.APPLICATION_JSON_VALUE )
+			@GetMapping(value = "/" ,  produces = MediaType.APPLICATION_JSON_VALUE )
 			@ApiOperation(value = "Renvoi toutes les  Sessions USSD" , notes = "cette methode permet de renvoyer toutes les  Sessions USSD enregistrées" , responseContainer = "UssdSessionDto") 
 					@ApiResponses(value = {
 						@ApiResponse(code = 200 , message = "La liste des Sessions USSD / une liste vide")
@@ -42,7 +45,7 @@ public class UssdSessionController {
 			}
 			
 			//FindUssdSessionByServiceId
-			@GetMapping(value = "/ussdSessions/service{id}" , produces = MediaType.APPLICATION_JSON_VALUE )
+			@GetMapping(value = "/service{id}" , produces = MediaType.APPLICATION_JSON_VALUE )
 			@ApiOperation(value = "Rechercher la liste des sessions d'un service " , notes = "cette methode permet de chercher la liste des sessions d'un service" , response = UssdSessionDto.class) 
 			@ApiResponses(value = {
 					 @ApiResponse(code = 200 , message = "la liste des sessions du service trouvée"),

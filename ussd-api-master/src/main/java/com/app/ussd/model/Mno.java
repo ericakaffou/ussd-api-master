@@ -7,8 +7,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.app.ussd.dto.MnoDto;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -37,20 +35,6 @@ public class Mno extends AbstractEntity {
 		 private List<RouteMno> routeMno;  
 		 
 		 
-		// Mapping de Account -> AccountDto
-		    public  static MnoDto toDto(Mno mno) {
-		    	
-		    	if (mno == null) {    		
-		    		return null ;
-		    		// TODO throw an execption
-		    	}
-		    	
-		    	return MnoDto.builder()
-		    			.id(mno.getId())
-		    			.mcc(mno.getMcc())
-		    			.mnc(mno.getMnc())
-		    			.mnoName(mno.getMnoName())
-		    			.build() ;
-		    }
+		
 
 }

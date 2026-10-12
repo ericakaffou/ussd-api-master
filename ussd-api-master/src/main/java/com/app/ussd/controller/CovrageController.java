@@ -1,3 +1,7 @@
+/*
+Controlleur Standard (CRUD)
+*/
+
 package com.app.ussd.controller;
 
 import java.util.List;
@@ -22,9 +26,9 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @CrossOrigin("*")
-@Api("${app.root.url}" +"/covrage")
+@Api(tags = "Covrage")
 @RestController
-@RequestMapping("${app.root.url}")
+@RequestMapping("${app.root.url}" +"/covrage")
 public class CovrageController {
 	
 	
@@ -37,7 +41,7 @@ public class CovrageController {
 		this.covrageService = covrageService;
 	}
 
-	@PostMapping(value ="/covrage/" , consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE )
+	@PostMapping(value ="/" , consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE )
 	@ApiOperation(value = "Enregistrer ou modidier un Covrage" , notes = "cette methode permet d'enregistrer ou modidié  un Covrage" , response = CovrageDto.class) 
 	@ApiResponses(value = {
 			 @ApiResponse(code = 200 , message = "l'objet Covrage cree/modidié "),
@@ -47,7 +51,7 @@ public class CovrageController {
 		return covrageService.Save(dto);
 	}
 
-	@GetMapping(value ="/covrage/{id}" , produces = MediaType.APPLICATION_JSON_VALUE )
+	@GetMapping(value ="/{id}" , produces = MediaType.APPLICATION_JSON_VALUE )
 	@ApiOperation(value = "Rechercher un Covrage" , notes = "cette methode permet de chercher un Covrage par son id" , response = CovrageDto.class) 
 	@ApiResponses(value = {
 			 @ApiResponse(code = 200 , message = "l'objet Covrage trouvé dans la BDD"),
@@ -58,7 +62,7 @@ public class CovrageController {
 
 	
 
-	@GetMapping(value ="/covrage/" ,  produces = MediaType.APPLICATION_JSON_VALUE )
+	@GetMapping(value ="/" ,  produces = MediaType.APPLICATION_JSON_VALUE )
 	@ApiOperation(value = "Renvoi tous les  Covrages" , notes = "cette methode permet de renvoyer la liste des Covrages dans la BDD" , responseContainer = "CovrageDto") 
 	@ApiResponses(value = {
 	@ApiResponse(code = 200 , message = "La liste des Covrages / une liste vide")			
@@ -67,7 +71,7 @@ public class CovrageController {
 		
 	}
 	
-	@GetMapping(value ="/covrage/sc/{id}" ,  produces = MediaType.APPLICATION_JSON_VALUE )
+	@GetMapping(value ="/sc/{id}" ,  produces = MediaType.APPLICATION_JSON_VALUE )
 	@ApiOperation(value = "Renvoi tous les  Covrages d'un Service Code" , notes = "cette methode permet de renvoyer la liste des Covrages d'un Service Code dans la BDD" , responseContainer = "CovrageDto") 
 	@ApiResponses(value = {
 			@ApiResponse(code = 200 , message = "La liste des Covrages d'un Service Code / une liste vide")			
@@ -76,7 +80,7 @@ public class CovrageController {
 		return covrageService.FindByServiceCodeId(id);
 	}
 
-	@DeleteMapping(value ="/covrage/delete/{id}")
+	@DeleteMapping(value ="/delete/{id}")
 	@ApiOperation(value = "Supprimer un Covrage" , notes = "cette methode permet de supprimer un Covrage par son ID" ) 
 	@ApiResponses(value = {
 			 @ApiResponse(code = 200 , message = "l'objet Covrage a ete supprimé dans la BDD")

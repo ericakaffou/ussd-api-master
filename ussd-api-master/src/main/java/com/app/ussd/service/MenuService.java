@@ -1,3 +1,6 @@
+/*
+Service Standard (CRUD)
+*/
 package com.app.ussd.service;
 
 import java.util.ArrayList;
@@ -20,26 +23,19 @@ import com.app.ussd.repository.ServiceRepository;
 import com.app.ussd.utils.Constants;
 import com.app.ussd.validator.MenuValidator;
 
-
-
 @Service
 public class MenuService {
 	
 	 private final  MenuRepository menuRepo;
 	 private final MenuOptionRepository optionRepo;	
 	 private final  ServiceRepository serviceRepo;
-	
-	 
-	
-	
-	public MenuService(MenuRepository menuRepo, MenuOptionRepository optionRepo, ServiceRepository serviceRepo) {
+
+	 public MenuService(MenuRepository menuRepo, MenuOptionRepository optionRepo, ServiceRepository serviceRepo) {
 		super();
 		this.menuRepo = menuRepo;
 		this.optionRepo = optionRepo;
 		this.serviceRepo = serviceRepo;
 	}
-
-
 	//save ok
 	public MenuDto Save(MenuDto dto) throws java.lang.Exception {
 		
@@ -115,9 +111,8 @@ public class MenuService {
 	// Mapping de Menu -> MenuDto
     public   MenuDto toDto(Menu menu) {
     	
-    	if (menu == null) {    		
-    		return null ;
-    		// TODO throw an execption
+    	if (menu == null) {  
+			throw new EntityNotFoundException (Constants.FAILED,ErrorCodes.MENU_NOT_FOUND);  		
     	}
     	
     	return MenuDto.builder()

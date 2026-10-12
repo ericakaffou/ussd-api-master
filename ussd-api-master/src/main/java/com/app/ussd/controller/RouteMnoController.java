@@ -1,3 +1,6 @@
+/*
+Controlleur Standard (CRUD)
+*/
 package com.app.ussd.controller;
 
 
@@ -21,8 +24,8 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@Api("${app.root.url}" +"/RouteMno")
-@RequestMapping("${app.root.url}")
+@Api(tags ="RouteMno")
+@RequestMapping("${app.root.url}"+"/routemno")
 public class RouteMnoController {
 	
 	
@@ -35,7 +38,7 @@ public class RouteMnoController {
 	}
 
 	//Save
-	@PostMapping(value ="/routemno/" , consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE )
+	@PostMapping(value ="/" , consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE )
 	@ApiOperation(value = "Enregistrer ou Modifier une RouteMno" , notes = "cette methode permet d'enregistrer  ou Modifier une RouteMno" , response = RouteMnoDto.class) 
 	@ApiResponses(value = {
 			 @ApiResponse(code = 200 , message = "l'objet RouteMno cree/modifié "),
@@ -45,7 +48,7 @@ public class RouteMnoController {
 	}
 
 	//FindById
-	@GetMapping(value ="/routemno/{id}" , produces = MediaType.APPLICATION_JSON_VALUE )
+	@GetMapping(value ="/{id}" , produces = MediaType.APPLICATION_JSON_VALUE )
 	@ApiOperation(value = "Rechercher une RouteMno" , notes = "cette methode permet de chercher une RouteMno par son id" , response = RouteMnoDto.class) 
 	@ApiResponses(value = {
 			 @ApiResponse(code = 200 , message = "l'objet RouteMno trouvé dans la BDD"),
@@ -55,7 +58,7 @@ public class RouteMnoController {
 	}
 
 	//FindByCovrageId
-	@GetMapping(value ="/routemno/covrage/{id}" , produces = MediaType.APPLICATION_JSON_VALUE )
+	@GetMapping(value ="/covrage/{id}" , produces = MediaType.APPLICATION_JSON_VALUE )
 	@ApiOperation(value = "Rechercher un RouteMno" , notes = "cette methode permet de lister toutes les RouteMno du meme covrage" , response = RouteMnoDto.class) 
 	@ApiResponses(value = {
 			 @ApiResponse(code = 200 , message = "l'objet RouteMno trouvé dans la BDD"),
@@ -65,7 +68,7 @@ public class RouteMnoController {
 	}
 
 	//FindAll
-	@GetMapping(value ="/routemno/" ,  produces = MediaType.APPLICATION_JSON_VALUE )
+	@GetMapping(value ="/" ,  produces = MediaType.APPLICATION_JSON_VALUE )
 	@ApiOperation(value = "Renvoi toutes les  RouteMnos" , notes = "cette methode permet de renvoyer la liste des RouteMnos dans la BDD" , responseContainer = "RouteMnoDto") 
 	@ApiResponses(value = {
 	@ApiResponse(code = 200 , message = "La liste des RouteMnos / une liste vide")			
@@ -74,7 +77,7 @@ public class RouteMnoController {
 		}
 
 	//Delete
-	@DeleteMapping(value ="/routemno/delete/{id}")
+	@DeleteMapping(value ="/delete/{id}")
 	@ApiOperation(value = "Supprimer un RouteMno" , notes = "cette methode permet de supprimer un RouteMno par son ID" ) 
 	@ApiResponses(value = {
 			 @ApiResponse(code = 200 , message = "l'objet RouteMno a ete supprimé dans la BDD")

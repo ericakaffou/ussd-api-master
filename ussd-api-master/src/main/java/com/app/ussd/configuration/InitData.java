@@ -1,3 +1,7 @@
+/*
+Cette Classe permet d'initialliser le super admin de l'application
+*/
+
 package com.app.ussd.configuration;
 
 import java.util.HashSet;

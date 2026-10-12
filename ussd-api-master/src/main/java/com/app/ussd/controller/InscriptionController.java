@@ -24,8 +24,8 @@ import io.swagger.annotations.ApiResponses;
 
 //OK---check
 @CrossOrigin("*")
-@Api("/inscriptionController")
-@RequestMapping("${app.root.url}")
+@Api(tags = "Inscription")
+@RequestMapping("${app.root.url}" + "/inscription")
 @RestController
 
 public class InscriptionController  {
@@ -41,7 +41,7 @@ public class InscriptionController  {
 
 
 	//Save &Edit
-	@PostMapping(value = "/inscriptionController/" , consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE )
+	@PostMapping(value = "/" , consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE )
 	@ApiOperation(value = "Enregistrer Ou Modifier un Account" , notes = "cette methode permet d'enregistrer  Ou Modifier  un Account" , response = AccountDto.class) 
 	@ApiResponses(value = {
 			 @ApiResponse(code = 200 , message = "l'objet Account Cree/Modifié "),

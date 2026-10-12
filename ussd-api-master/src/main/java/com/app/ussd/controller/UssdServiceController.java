@@ -1,3 +1,6 @@
+/*
+Controlleur Standard (CRUD)
+*/
 package com.app.ussd.controller;
 
 import java.util.List;
@@ -22,8 +25,8 @@ import io.swagger.annotations.ApiResponses;
 
 @CrossOrigin("*")
 @RestController
-@Api("${app.root.url}" +"/service")
-@RequestMapping("${app.root.url}")
+@Api(tags ="UssdService" )
+@RequestMapping("${app.root.url}"+"/service")
 public class UssdServiceController {
 	
 	
@@ -36,7 +39,7 @@ public class UssdServiceController {
 		this.ussdService = ussdService;
 	}
 
-	@PostMapping(value ="/service/" , consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE )
+	@PostMapping(value ="/" , consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE )
 	@ApiOperation(value = "Enregistrer Ou Modifier un service" , notes = "cette methode permet d'Enregistrer Ou Modifier  un service" , response = UssdServiceDto.class) 
 	@ApiResponses(value = {
 			 @ApiResponse(code = 200 , message = "l'objet service cree / modifié "),
@@ -47,7 +50,7 @@ public class UssdServiceController {
 	}
 	
 	//FindById
-	@GetMapping(value ="/service/{id}" , produces = MediaType.APPLICATION_JSON_VALUE )
+	@GetMapping(value ="/{id}" , produces = MediaType.APPLICATION_JSON_VALUE )
 	@ApiOperation(value = "Rechercher un service" , notes = "cette methode permet de chercher un service par son id" , response = UssdServiceDto.class) 
 	@ApiResponses(value = {
 			 @ApiResponse(code = 200 , message = "l'objet service trouvé dans la BDD"),
@@ -57,7 +60,7 @@ public class UssdServiceController {
 	}
 	
 		//FindAll
-		@GetMapping(value ="/services/" ,  produces = MediaType.APPLICATION_JSON_VALUE )
+		@GetMapping(value ="/" ,  produces = MediaType.APPLICATION_JSON_VALUE )
 		@ApiOperation(value = "Renvoi tous les  services" , notes = "cette methode permet de renvoyer la liste des services dans la BDD" , responseContainer = "UssdServiceDto") 
 		@ApiResponses(value = {
 		@ApiResponse(code = 200 , message = "La liste des services / une liste vide")			
@@ -66,7 +69,7 @@ public class UssdServiceController {
 			}
 
 		//Delete
-		@DeleteMapping(value ="/service/delete/{id}")
+		@DeleteMapping(value ="/delete/{id}")
 		@ApiOperation(value = "Supprimer un service" , notes = "cette methode permet de supprimer un service par son ID" ) 
 		@ApiResponses(value = {
 				 @ApiResponse(code = 200 , message = "l'objet service a ete supprimé dans la BDD")
@@ -75,7 +78,7 @@ public class UssdServiceController {
 		}
 		
 		//FindByAccountId
-		@GetMapping(value ="/services/account/{id}" ,  produces = MediaType.APPLICATION_JSON_VALUE )
+		@GetMapping(value ="/account/{id}" ,  produces = MediaType.APPLICATION_JSON_VALUE )
 		@ApiOperation(value = "Renvoi tous les  services d'un compte client" , notes = "cette methode permet de renvoyer la liste des services d'un compte client" , responseContainer = "UssdServiceDto") 
 		@ApiResponses(value = {
 		@ApiResponse(code = 200 , message = "La liste des services d'un Account / une liste vide")			

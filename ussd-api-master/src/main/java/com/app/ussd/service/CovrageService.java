@@ -1,3 +1,6 @@
+/*
+Service Standard (CRUD)
+*/
 package com.app.ussd.service;
 
 import java.util.ArrayList;
@@ -51,8 +54,7 @@ public class CovrageService  {
 		}
 		
 		/*
-		 * REGLES
-		 * 
+		 * REGLES:
 		 * Un Sc Dedicated ne peut avoir qu'un seul covrage car il n'est pas partager.
 		 */
 		 Covrage covrage = new Covrage();

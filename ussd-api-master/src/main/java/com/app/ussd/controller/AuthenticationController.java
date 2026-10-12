@@ -1,3 +1,6 @@
+/*
+Controller de recuperation du token JWT
+*/
 package com.app.ussd.controller;
 
 import org.springframework.http.ResponseEntity;
@@ -15,10 +18,12 @@ import com.app.ussd.service.auth.ApplicationUserDetailsService;
 import com.app.ussd.service.auth.JwtUtil;
 import com.app.ussd.utils.Constants;
 
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
-@RequestMapping("${app.root.url}" + "/auth")
+@Api(tags = "Authentication")
+@RequestMapping("${app.root.url}" + "/authenticate")
 public class AuthenticationController {	
 	  
 	private final ApplicationUserDetailsService userDetailsService;
@@ -36,7 +41,7 @@ public class AuthenticationController {
 	
 	
 	
-	@PostMapping("/authenticate")
+	@PostMapping("/")
 	public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request){
 		log.info("AuthenticationController");
 		

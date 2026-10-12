@@ -1,3 +1,6 @@
+/*
+Service Standard (CRUD)
+*/
 package com.app.ussd.service;
 
 import java.util.ArrayList;
@@ -133,9 +136,9 @@ public class MenuOptionService {
 	// Mapping de MenuOption -> MenuOptionDto
 	    public   MenuOptionDto toDto(MenuOption menuOption) {
 	    	
-	    	if (menuOption == null) {    		
-	    		return null ;
-	    		// TODO throw an execption
+	    	if (menuOption == null) {    
+				throw new EntityNotFoundException (Constants.FAILED,ErrorCodes.MENU_OPTION_NOT_FOUND);	
+	    		
 	    	}
 	    	
 	    	return MenuOptionDto.builder()
