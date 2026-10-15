@@ -30,6 +30,10 @@ import com.app.ussd.validator.AccountValidator;
 
 
 
+/**
+ * AccountService : Un compte ne devrait pas etre supprimer; utiliser plutot l'option enabled
+
+ */
 @org.springframework.stereotype.Service
 public class AccountService  {
 	
@@ -153,7 +157,7 @@ public class AccountService  {
 	
 	//Delete
 	// Un compte ne devrait pas etre supprimer; utiliser plutot l'option enabled
-	// TODO suppression en cascade
+	// suppression en cascade
 	public void Delete(Long id) {
 		
 		AccountDto account = this.FindById(id);
