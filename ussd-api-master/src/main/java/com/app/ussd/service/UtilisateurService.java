@@ -39,7 +39,7 @@ public class UtilisateurService {
 		this.accountRepo = accountRepo;
 		this.roleRepo = roleRepo;
 	}
-	//Save TODO
+	//Save 
 	public UserDto Save(UserDto dto) throws java.lang.Exception {
 		List<String> errors = UserValidator.validate(dto);
 		
@@ -151,8 +151,7 @@ public class UtilisateurService {
     public  UserDto toDto(Utilisateur utilisateur) {
     	
     	if (utilisateur == null) {    		
-    		return null ;
-    		// TODO throw an execption
+    		throw new EntityNotFoundException (Constants.FAILED,ErrorCodes.USER_NOT_FOUND);
     	}
     	
     /*	 List<Roles> roles = new ArrayList<>();

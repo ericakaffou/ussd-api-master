@@ -71,8 +71,8 @@ public class RoleService {
 	public   RolesDto toDto(Roles role) {
 	
 	if (role == null) {    		
-		return null ;
-		// TODO throw an execption
+		
+		throw new EntityNotFoundException (Constants.FAILED,ErrorCodes.ROLE_NOT_FOUND);
 	}
 	
 	return RolesDto.builder()

@@ -176,8 +176,8 @@ public class AccountService  {
     public   AccountDto toDto(Account account) {
     	
     	if (account == null) {    		
-    		return null ;
-    		// TODO throw an execption
+    		throw new EntityNotFoundException (Constants.FAILED,ErrorCodes.ACCOUNT_NOT_FOUND);
+    		
     	}
     	
     	return AccountDto.builder()

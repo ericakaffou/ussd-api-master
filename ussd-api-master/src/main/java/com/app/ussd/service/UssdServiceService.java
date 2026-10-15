@@ -157,8 +157,8 @@ public class UssdServiceService {
     public  UssdServiceDto toDto(UssdService ussdService) {
     	
     	if (ussdService == null) {    		
-    		return null ;
-    		// TODO throw an execption
+    		throw new EntityNotFoundException (Constants.FAILED,ErrorCodes.SERVICE_NOT_FOUND);
+    		
     	}
     	
     	return UssdServiceDto.builder()

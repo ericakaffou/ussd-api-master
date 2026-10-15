@@ -158,8 +158,7 @@ public class CovrageService  {
 		 public   CovrageDto toDto(Covrage covrage) {
 	    	
 	    	if (covrage == null) {    		
-	    		return null ;
-	    		// TODO throw an execption
+	    		throw new EntityNotFoundException (Constants.FAILED,ErrorCodes.COVRAGE_NOT_FOUND);
 	    	}    	
 	    	return CovrageDto.builder()
 	    			.id(covrage.getId())

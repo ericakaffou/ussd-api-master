@@ -56,10 +56,10 @@ public class InitData {
 	    account.setEmail("ericakaffou@gmail.com");
 	    account.setEnabled(true);
 	    
-	    // TODO //
-	    //Account accountnew = accountRepo.save(account);
+	    
 	    
 	      Utilisateur newUser = new Utilisateur();
+		  //enregistrement de account et set dans user
 		  newUser.setAccount(accountRepo.save(account));
 		  newUser.setUsername("ericakaffou@gmail.com");
 		  //Encodage du mot de passe 

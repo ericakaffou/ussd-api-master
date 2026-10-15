@@ -143,8 +143,7 @@ public class RouteMnoService  {
     public  RouteMnoDto toDto(RouteMno route) {
     	
     	if (route == null) {    		
-    		return null ;
-    		// TODO throw an execption
+    		throw new EntityNotFoundException (Constants.FAILED,ErrorCodes.ROUTE_MNO_NOT_FOUND);
     	}
     	
     	return RouteMnoDto.builder()

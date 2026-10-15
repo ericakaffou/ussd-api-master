@@ -119,8 +119,7 @@ public class ServiceCodeService {
     public  ServiceCodeDto toDto(ServiceCode serviceCode) {
     	
     	if (serviceCode == null) {    		
-    		return null ;
-    		// TODO throw an execption
+    		throw new EntityNotFoundException (Constants.FAILED,ErrorCodes.SERVICE_CODE_NOT_FOUND);
     	}
     	
     	return ServiceCodeDto.builder()

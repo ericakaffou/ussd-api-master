@@ -5,7 +5,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.app.ussd.dto.UssdSessionTransactionDto;
+import com.app.ussd.exception.EntityNotFoundException;
+import com.app.ussd.exception.ErrorCodes;
 import com.app.ussd.model.AbstractEntity;
+import com.app.ussd.utils.Constants;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -39,8 +43,7 @@ public class UssdSessionTransaction_ARCHIVE extends AbstractEntity{
     public  static UssdSessionTransactionDto toDto(UssdSessionTransaction_ARCHIVE transaction) {
     	
     	if (transaction == null) {    		
-    		return null ;
-    		// TODO throw an execption
+    		throw new EntityNotFoundException (Constants.FAILED,ErrorCodes.TRANSACTION_NOT_FOUND);
     	}
     	
     	return UssdSessionTransactionDto.builder()

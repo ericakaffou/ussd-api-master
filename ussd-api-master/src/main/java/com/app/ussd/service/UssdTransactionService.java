@@ -65,8 +65,8 @@ public class UssdTransactionService {
 	    public   UssdSessionTransactionDto toDto(UssdSessionTransaction transaction) {
 	    	
 	    	if (transaction == null) {    		
-	    		return null ;
-	    		// TODO throw an execption
+	    		
+	    		throw new EntityNotFoundException (Constants.FAILED,ErrorCodes.TRANSACTION_NOT_FOUND);
 	    	}
 	    	
 	    	return UssdSessionTransactionDto.builder()

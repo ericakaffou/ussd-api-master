@@ -83,8 +83,7 @@ public class UssdSessionService {
     public  UssdSessionDto toDto(UssdSession ussdSession) {
     	
     	if (ussdSession == null) {    		
-    		return null ;
-    		//TODO 
+    		throw new EntityNotFoundException (Constants.FAILED,ErrorCodes.USSD_SESSION_NOT_FOUND);
     	}
     	
     	return UssdSessionDto.builder()
