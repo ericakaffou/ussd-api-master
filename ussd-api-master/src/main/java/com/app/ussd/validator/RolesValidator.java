@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.util.StringUtils;
 
-import com.app.ussd.dto.RolesDto;
+import com.app.ussd.model.dto.RolesDto;
 
 
 public class RolesValidator {

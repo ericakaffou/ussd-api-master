@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.ussd.dto.UssdServiceDto;
+import com.app.ussd.model.dto.UssdServiceDto;
 import com.app.ussd.service.UssdServiceService;
 
 import io.swagger.annotations.Api;

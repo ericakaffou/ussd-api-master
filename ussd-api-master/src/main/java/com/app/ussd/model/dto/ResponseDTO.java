@@ -1,3 +1,4 @@
+package com.app.ussd.model.dto;
 /*package com.app.ussd.dto;
 
 import java.util.List;

@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.util.StringUtils;
 
-import com.app.ussd.dto.AccountDto;
+import com.app.ussd.model.dto.AccountDto;
 
 public class AccountValidator {
 	

@@ -1,4 +1,4 @@
-package com.app.ussd.dto;
+package com.app.ussd.model.dto;
 
 import lombok.Builder;
 import lombok.Data;

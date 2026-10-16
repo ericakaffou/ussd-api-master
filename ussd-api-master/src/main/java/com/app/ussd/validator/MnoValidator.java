@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.util.StringUtils;
 
-import com.app.ussd.dto.MnoDto;
+import com.app.ussd.model.dto.MnoDto;
 
 public class MnoValidator {
 	

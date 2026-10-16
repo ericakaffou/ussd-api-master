@@ -1,4 +1,4 @@
-package com.app.ussd.dto.auth;
+package com.app.ussd.model.dto.auth;
 
 import lombok.Builder;
 import lombok.Data;

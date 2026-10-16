@@ -9,7 +9,6 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.app.ussd.dto.CovrageDto;
 import com.app.ussd.exception.EntityNotFoundException;
 import com.app.ussd.exception.ErrorCodes;
 import com.app.ussd.exception.Exception;
@@ -17,6 +16,7 @@ import com.app.ussd.exception.InvalidEntityException;
 import com.app.ussd.model.Covrage;
 import com.app.ussd.model.RouteMno;
 import com.app.ussd.model.ServiceCode;
+import com.app.ussd.model.dto.CovrageDto;
 import com.app.ussd.repository.CovrageRepository;
 import com.app.ussd.repository.RouteMnoRepository;
 import com.app.ussd.repository.ServiceCodeRepository;

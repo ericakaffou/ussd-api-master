@@ -6,13 +6,13 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.app.ussd.dto.ServiceCodeDto;
 import com.app.ussd.exception.EntityNotFoundException;
 import com.app.ussd.exception.ErrorCodes;
 import com.app.ussd.exception.Exception;
 import com.app.ussd.exception.InvalidEntityException;
 import com.app.ussd.model.Country;
 import com.app.ussd.model.ServiceCode;
+import com.app.ussd.model.dto.ServiceCodeDto;
 import com.app.ussd.repository.CountryRepository;
 import com.app.ussd.repository.ServiceCodeRepository;
 import com.app.ussd.utils.Constants;

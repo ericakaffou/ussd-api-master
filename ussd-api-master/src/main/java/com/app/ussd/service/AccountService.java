@@ -12,7 +12,6 @@ import java.util.Set;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.StringUtils;
 
-import com.app.ussd.dto.AccountDto;
 import com.app.ussd.exception.EntityNotFoundException;
 import com.app.ussd.exception.ErrorCodes;
 import com.app.ussd.exception.InvalidEntityException;
@@ -21,6 +20,7 @@ import com.app.ussd.model.Account;
 import com.app.ussd.model.Roles;
 import com.app.ussd.model.UssdService;
 import com.app.ussd.model.Utilisateur;
+import com.app.ussd.model.dto.AccountDto;
 import com.app.ussd.repository.AccountRepository;
 import com.app.ussd.repository.ServiceRepository;
 import com.app.ussd.repository.UtilisateurRepository;

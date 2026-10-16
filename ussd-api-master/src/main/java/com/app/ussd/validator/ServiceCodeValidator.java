@@ -3,7 +3,7 @@ package com.app.ussd.validator;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.app.ussd.dto.ServiceCodeDto;
+import com.app.ussd.model.dto.ServiceCodeDto;
 
 public class ServiceCodeValidator {
 	

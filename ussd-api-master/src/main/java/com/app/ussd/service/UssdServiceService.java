@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.app.ussd.dto.UssdServiceDto;
 import com.app.ussd.exception.EntityNotFoundException;
 import com.app.ussd.exception.ErrorCodes;
 import com.app.ussd.exception.Exception;
@@ -15,6 +14,7 @@ import com.app.ussd.model.Account;
 import com.app.ussd.model.Menu;
 import com.app.ussd.model.UssdService;
 import com.app.ussd.model.UssdSession;
+import com.app.ussd.model.dto.UssdServiceDto;
 import com.app.ussd.repository.AccountRepository;
 import com.app.ussd.repository.MenuRepository;
 import com.app.ussd.repository.ServiceRepository;

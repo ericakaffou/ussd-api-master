@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.app.ussd.dto.AccountDto;
+
+import com.app.ussd.model.dto.AccountDto;
 import com.app.ussd.service.AccountService;
 
 import io.swagger.annotations.Api;

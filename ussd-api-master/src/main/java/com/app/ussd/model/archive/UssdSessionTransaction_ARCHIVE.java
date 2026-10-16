@@ -4,10 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.app.ussd.dto.UssdSessionTransactionDto;
 import com.app.ussd.exception.EntityNotFoundException;
 import com.app.ussd.exception.ErrorCodes;
 import com.app.ussd.model.AbstractEntity;
+import com.app.ussd.model.dto.UssdSessionTransactionDto;
 import com.app.ussd.utils.Constants;
 
 import lombok.AllArgsConstructor;

@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.util.StringUtils;
 
-import com.app.ussd.dto.UssdSessionParamDto;
+import com.app.ussd.model.dto.UssdSessionParamDto;
 
 public class UssdSessionParamValidator {
 

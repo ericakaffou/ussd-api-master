@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.ussd.dto.CovrageDto;
+import com.app.ussd.model.dto.CovrageDto;
 //import com.app.ussd.dto.ResponseDTO;
 import com.app.ussd.service.CovrageService;
 

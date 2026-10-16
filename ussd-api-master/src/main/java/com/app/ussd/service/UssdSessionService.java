@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.app.ussd.dto.UssdSessionDto;
 import com.app.ussd.exception.EntityNotFoundException;
 import com.app.ussd.exception.ErrorCodes;
 import com.app.ussd.model.UssdService;
 import com.app.ussd.model.UssdSession;
 import com.app.ussd.model.UssdSessionTransaction;
+import com.app.ussd.model.dto.UssdSessionDto;
 import com.app.ussd.repository.ServiceRepository;
 import com.app.ussd.repository.UssdSessionRepository;
 import com.app.ussd.repository.UssdTransactionRepository;

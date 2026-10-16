@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.util.StringUtils;
 
-import com.app.ussd.dto.UssdSessionTransactionDto;
+import com.app.ussd.model.dto.UssdSessionTransactionDto;
 
 public class UssdSessionTransactionValidator {
 

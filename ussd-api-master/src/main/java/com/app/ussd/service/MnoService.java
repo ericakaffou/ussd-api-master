@@ -10,13 +10,13 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.app.ussd.dto.MnoDto;
 import com.app.ussd.exception.EntityNotFoundException;
 import com.app.ussd.exception.ErrorCodes;
 import com.app.ussd.exception.Exception;
 import com.app.ussd.exception.InvalidEntityException;
 import com.app.ussd.model.Mno;
 import com.app.ussd.model.RouteMno;
+import com.app.ussd.model.dto.MnoDto;
 import com.app.ussd.repository.MnoRepository;
 import com.app.ussd.repository.RouteMnoRepository;
 import com.app.ussd.utils.Constants;

@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.util.StringUtils;
 
-import com.app.ussd.dto.MenuDto;
+import com.app.ussd.model.dto.MenuDto;
 
 public class MenuValidator {
 	
