@@ -10,8 +10,10 @@ import com.app.ussd.model.Utilisateur;
 
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> {
 
+   //LEFT JOIN FETCH u.roles charge les rôles dans la même requête SQL que l'utilisateur.
    @Query(" SELECT DISTINCT u FROM Utilisateur u LEFT JOIN FETCH u.roles  WHERE u.username = :email")
    public Optional<Utilisateur> findByUsername (String email);
+   
    
    public List<Utilisateur> findByAccountId(long accountId);
    
