@@ -19,6 +19,8 @@ import com.app.ussd.exception.InvalidEntityException;
 
 
 // C'est un l istenner qui ecoute sur toute l'application et  instercepte toutes les exceptions de l'aplication
+// Ici on a 4 methode par type d'exception (EntityNotFoundException ,InvalidEntityException , com.app.ussd.exception.Exception et BadCredentialsException)
+// en fonction du type d'exeption on renvoie un errorDto 
 
 @RestControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler{

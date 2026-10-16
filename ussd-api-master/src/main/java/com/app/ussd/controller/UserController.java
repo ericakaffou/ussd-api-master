@@ -27,7 +27,7 @@ import io.swagger.annotations.ApiResponses;
 @CrossOrigin("*")
 @RestController
 @Api(tags ="Utilisateur")
-@RequestMapping("${app.root.url}"  +"/user")
+@RequestMapping("${app.root.url}"+"/user")
 public class UserController {
 	
 	

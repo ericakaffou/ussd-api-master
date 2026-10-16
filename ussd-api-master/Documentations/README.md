@@ -111,5 +111,9 @@ App3 : MnoService : Integration de l'api de l'operateur mobile
        - Envoi des reponses au MNO
 
 11/10/2026
- To do : documenter toutes les classes (service , modele, metier)
-    @Api("/inscriptionController") et @RequestMapping("${app.root.url}") à revoir
+ To do : 
+    - documenter toutes les classes (service , modele, metier)
+
+    - revoir les dto de retour : certaines valeur ne doivent pas etre null
+            sc: ok
+            

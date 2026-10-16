@@ -18,6 +18,8 @@ import com.app.ussd.repository.ServiceCodeRepository;
 import com.app.ussd.utils.Constants;
 import com.app.ussd.validator.ServiceCodeValidator;
 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @Service
 public class ServiceCodeService {
 
@@ -40,17 +42,22 @@ public class ServiceCodeService {
 		if(!errors.isEmpty()) {
 			 throw new InvalidEntityException (Constants.ERROR,ErrorCodes.SERVICE_CODE_NOT_VALID, errors);
 		}
+
+		// verifier le country_code ici
+		Optional<Country> optionalCountry = countryRepo.findByCountryCode(dto.getContry_code());
+
+		if (optionalCountry.isEmpty()) {
+
+			throw new Exception(Constants.ERROR, ErrorCodes.PAYS_CODE_NOT_VALID);
+		}
 		
-		Optional<ServiceCode> optionalSC = scRepo.findByServiceCode(dto.getServiceCode());
+		
+		Optional<ServiceCode> optionalSC = scRepo.findServiceCodeForCountry(dto.getServiceCode() , dto.getContry_code() );
 		if (optionalSC.isPresent()) {
 			throw new Exception(Constants.ERROR, ErrorCodes.SERVICE_CODE_ALREADY_EXIST);
 		}
 		
-		// verifier le country_code ici
-		Optional<Country> optionalCountry = countryRepo.findByCountryCode(dto.getContry_code());
-		if (optionalSC.isEmpty()) {
-			throw new Exception(Constants.ERROR, ErrorCodes.PAYS_CODE_NOT_VALID);
-		}
+		
 		
 	 	ServiceCode serviceCode = new ServiceCode();
 	    serviceCode.setServiceCode(dto.getServiceCode());
@@ -126,6 +133,7 @@ public class ServiceCodeService {
     			.id(serviceCode.getId())
     			.serviceCode(serviceCode.getServiceCode())
     			.dedicated(serviceCode.isDedicated())
+				.contry_code(serviceCode.getCountry().getCountryCode())
     			.build() ;
     }
 	

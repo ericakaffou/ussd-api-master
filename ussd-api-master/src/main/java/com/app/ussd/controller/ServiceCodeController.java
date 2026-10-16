@@ -41,7 +41,8 @@ public class ServiceCodeController {
 	}
 
 	  //Save
-	  @PreAuthorize("hasAuthority('ADMIN')")
+	  //@PreAuthorize("hasRole('ADMIN') || hasRole('SUPADMIN')")  -- no working
+	  @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('SUPADMIN')")
 	  @PostMapping(value ="/" , consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE )
 	  @ApiOperation(value = "Enregistrer Ou Modifier un Service Code" , notes = "cette methode permet d'enregistrer Ou Modifier un Service Code" , response = ServiceCodeDto.class) 
 	  @ApiResponses(value = {
