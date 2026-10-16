@@ -76,11 +76,7 @@ public class UtilisateurService {
 			  }			 
 			  roles.add(optionalRole.get());		
 			}
-		  newUser.setRoles(roles);	
-		  
-		  		  
-		  
-		  
+		  newUser.setRoles(roles);			 
 		  return  this.toDto(userRepo.save(newUser));	
 		
 		    
@@ -122,8 +118,7 @@ public class UtilisateurService {
 		 	for( Utilisateur utilisateur : listUser ) {
 				listUserDto.add(this.toDto(utilisateur))  ;			
 			}			
-			return listUserDto;
-		
+			return listUserDto;		
 	}
 	
 	
@@ -143,8 +138,7 @@ public class UtilisateurService {
 	//Delete	
 	public void Delete(Long id)  {		 
 		 UserDto user = this.FindById(id);
-		 userRepo.deleteById(user.getId());		 
-		 
+		 userRepo.deleteById(user.getId());			 
 	 }
 	
 	// Mapping de User -> UserDto
@@ -154,19 +148,14 @@ public class UtilisateurService {
     		throw new EntityNotFoundException (Constants.FAILED,ErrorCodes.USER_NOT_FOUND);
     	}
     	
-    /*	 List<Roles> roles = new ArrayList<>();
-    	 List<Roles> userRoles = userRepo.getUserRoles(utilisateur.getId());
-    	 for( Roles role : userRoles ) {
-    		 roles.add(role)  ;			
- 		}	
- 		*/			   
+		List<String> roles  = userRepo.findRoleNamesById(utilisateur.getId());
 		   
     	return UserDto.builder()
     			.id(utilisateur.getId())
     			.username(utilisateur.getUsername())
     			.enabled(utilisateur.isEnabled())
     			.accountId(utilisateur.getAccount().getId())
-    			//.roles(roles)
+    			.roles(roles)
     			.build() ;
     }
     

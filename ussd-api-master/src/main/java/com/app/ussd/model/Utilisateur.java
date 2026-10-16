@@ -29,7 +29,7 @@ public class Utilisateur extends AbstractEntity {
 
     private String password;
     
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
             name = "utilisateur_role",
             joinColumns = @JoinColumn(name = "user_id"),
