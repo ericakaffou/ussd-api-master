@@ -117,6 +117,7 @@ App3 : MnoService : Integration de l'api de l'operateur mobile
     - revoir les dto de retour : certaines valeur ne doivent pas etre null
             sc: ok
             user : ok
+            
 
-   -  FetchType.EAGER et lazy : revoir le code
+   -  FetchType.EAGER et lazy : revoir le code :OK
             
