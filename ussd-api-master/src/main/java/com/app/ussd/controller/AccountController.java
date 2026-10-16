@@ -31,9 +31,6 @@ public class AccountController  {
 	
 	
    	private final AccountService accountService;
-	
-	
-
 	public AccountController(AccountService accountService) {
 		super();
 		this.accountService = accountService;

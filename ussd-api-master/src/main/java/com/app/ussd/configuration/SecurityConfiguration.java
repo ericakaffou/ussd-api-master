@@ -63,7 +63,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 				"/v3/api-docs",
 				"/webjars/**",
 				"/swagger-ui/index.html",
-				"/**/**/inscriptionController/**").permitAll()
+				"/**/**/inscription/**").permitAll()
 				.anyRequest().authenticated()).sessionManagement(management -> management
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS));		 
 		 //pour activer le flitre ApplicationRequestFilter
