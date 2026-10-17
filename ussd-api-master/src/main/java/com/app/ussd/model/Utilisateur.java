@@ -1,5 +1,4 @@
 package com.app.ussd.model;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -35,7 +34,7 @@ public class Utilisateur extends AbstractEntity {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
             )
-    private Set<Roles> roles = new HashSet<>();
+    private Set<Roles> roles;
     
     private boolean enabled ;    
     
