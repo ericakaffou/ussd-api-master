@@ -22,7 +22,8 @@ public class Account extends AbstractEntity {
 	  private String accountName;
 	  private String email;
 	  private String password;
-	  private boolean enabled = false;
+
+	  private boolean enabled ;
 	  
 	   //Relation with Users
 	   @OneToMany(mappedBy = "account") 
