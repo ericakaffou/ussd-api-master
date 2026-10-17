@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
  * Classe d'integration des Shortcodes .
  *  Si le SC est dedicated , il y aura un seul covrage pour ce SC
  */
-@SuppressWarnings("serial")
+
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)

@@ -16,7 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@SuppressWarnings("serial")
+
 @AllArgsConstructor
 @NoArgsConstructor
 @MappedSuperclass

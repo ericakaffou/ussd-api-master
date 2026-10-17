@@ -2,7 +2,7 @@ package com.app.ussd.exception;
 
 import lombok.Getter;
 
-@SuppressWarnings("serial")
+
 public class Exception extends RuntimeException{
 	
 	@Getter

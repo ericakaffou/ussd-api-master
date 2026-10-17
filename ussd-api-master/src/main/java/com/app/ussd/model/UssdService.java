@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
-@SuppressWarnings("serial")
+
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)

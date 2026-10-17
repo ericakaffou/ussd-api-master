@@ -2,7 +2,6 @@ package com.app.ussd.exception;
 
 import lombok.Getter;
 
-@SuppressWarnings("serial")
 public class EntityNotFoundException extends RuntimeException{
 	
 	@Getter

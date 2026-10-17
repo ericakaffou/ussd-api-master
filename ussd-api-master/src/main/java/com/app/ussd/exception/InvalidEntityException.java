@@ -4,7 +4,7 @@ import java.util.List;
 
 import lombok.Getter;
 
-@SuppressWarnings("serial")
+
 public class InvalidEntityException  extends RuntimeException{
 	
 	@Getter
