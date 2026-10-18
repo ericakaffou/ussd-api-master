@@ -1,41 +1,11 @@
 # ussd-api-master
 
 
-Test Controller : 
-----------> via init-app-db  : dépreciated
-Account : ok
-Role :  ok
-User : ok 
-
-----------> via main-app :
-
-role : ok : initialiser au lancement avec data.sql
-
-Account : ok via init controller -> creation admin user  
-
-Account : ok mulitipe ( existing account) with UserControlleur   
-
-user : ok   ajout des roleNames sous forme de liste : A faire
-
-ServiceCode : ok
-
-Coverage  : OK
-
-UssdService : ok
-
-mno : ok
-
-routeMno : OK 
-
-menu : ok 
-
-menuOption : ok 
-
-expiration jwt : 
+workflow Admin / client interne :
 
 
 
-Workflow 
+Workflow client externe :
 
 1 - Auto creation d'un compte   : un compte peut avoir plusieur utilisateur ratachés
     Accompte Name - Email- MotDepasse 
@@ -45,7 +15,12 @@ Workflow
   Cet email sera l'utilisation  admin du compte : done
 
 
+  creation de route
+
+
 2 - Création du Service USSD
+
+
 
 
 

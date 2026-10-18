@@ -32,7 +32,9 @@ public class Country  {
 	  
 	 
 	  //Relation with Mno 
+	  /* 
 	   @OneToMany(mappedBy = "country") 
-	   private List<Mno> listMnos;
+	   private List<Mno> listMnos; 
+	   */
 
 }

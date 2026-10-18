@@ -1,3 +1,7 @@
+/*
+
+*/
+
 package com.app.ussd.model;
 
 import java.util.List;
@@ -25,7 +29,11 @@ public class ServiceCode extends AbstractEntity{
 	@OneToMany(mappedBy = "serviceCode") 
 	private List<Covrage> covrage;  
 	
-	
+	/*
+    Cette relation car on peut avoir le meme sc dans plusieurs pays.
+	Suppresion de la relation entre Counrty et Mno car transitivité !!! 
+	En Outre cette dernière n'est pas utile car mno ne sert qu'à avoir le mnoName pour le routage
+    */
 	@ManyToOne
     @JoinColumn(name = "country_id")
     private Country country;
