@@ -9,8 +9,6 @@ import lombok.Builder;
 import lombok.Data;
 
 //Erreur renvoyer à l'utilsateur
-
-
 @Data
 @Builder
 public class ErrorDto {
