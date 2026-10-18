@@ -48,6 +48,8 @@ Workflow
 2 - Création du Service USSD
 
 
+
+
 3 - Menu et option flow  (MISS CI)   (app2)
 
  - On crée le main menu  mainMenu =true ; menuType = 0 (1)
@@ -80,8 +82,8 @@ Workflow
  private boolean mainMenu;   // 1 if Main Menu , 0 default
  int menuType;           // 0: option menu ; 1: data Input Menu ; 2:Response Menu
 
- -------------------------------------------------------
- 
+-------------------------------------------------------
+
 3 applications :
 
  App 1 : Ussd master : Création de Account
@@ -124,7 +126,8 @@ App3 : MnoService : Integration de l'api de l'operateur mobile
 
    - revoir l'ordre et les variables dans postman 
 
-
 18/10/2026
-     securisation de jwt :   - mettre en place un refresh token
-                             - externaliser le jwt-secret
+     securisation de jwt :   
+
+            -mettre en place un refresh token
+            -externaliser le jwt-secret
