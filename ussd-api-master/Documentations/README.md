@@ -123,3 +123,8 @@ App3 : MnoService : Integration de l'api de l'operateur mobile
 17/10/2026
 
    - revoir l'ordre et les variables dans postman 
+
+
+18/10/2026
+     securisation de jwt :   - mettre en place un refresh token
+                             - externaliser le jwt-secret
