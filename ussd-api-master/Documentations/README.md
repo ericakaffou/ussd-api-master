@@ -83,7 +83,7 @@ App3 : MnoService : Integration de l'api de l'operateur mobile
 
        - reception des requetes from MNo
        - enregistrement BD
-       - envoi requete à App3 et reception de response  ***ici***
+       - envoi requete à App2 et reception de response  ***ici***
        - Formatage de la reponse pour le MNO
        - Envoi des reponses au MNO
 
