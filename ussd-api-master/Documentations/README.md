@@ -1,41 +1,11 @@
 # ussd-api-master
 
 
-Test Controller : 
-----------> via init-app-db  : dépreciated
-Account : ok
-Role :  ok
-User : ok 
-
-----------> via main-app :
-
-role : ok : initialiser au lancement avec data.sql
-
-Account : ok via init controller -> creation admin user  
-
-Account : ok mulitipe ( existing account) with UserControlleur   
-
-user : ok   ajout des roleNames sous forme de liste : A faire
-
-ServiceCode : ok
-
-Coverage  : OK
-
-UssdService : ok
-
-mno : ok
-
-routeMno : OK 
-
-menu : ok 
-
-menuOption : ok 
-
-expiration jwt : 
+workflow Admin / client interne :
 
 
 
-Workflow 
+Workflow client externe :
 
 1 - Auto creation d'un compte   : un compte peut avoir plusieur utilisateur ratachés
     Accompte Name - Email- MotDepasse 
@@ -45,7 +15,14 @@ Workflow
   Cet email sera l'utilisation  admin du compte : done
 
 
+  creation de route
+
+
 2 - Création du Service USSD
+
+
+
+
 
 
 3 - Menu et option flow  (MISS CI)   (app2)
@@ -80,8 +57,8 @@ Workflow
  private boolean mainMenu;   // 1 if Main Menu , 0 default
  int menuType;           // 0: option menu ; 1: data Input Menu ; 2:Response Menu
 
- -------------------------------------------------------
- 
+-------------------------------------------------------
+
 3 applications :
 
  App 1 : Ussd master : Création de Account
@@ -106,7 +83,7 @@ App3 : MnoService : Integration de l'api de l'operateur mobile
 
        - reception des requetes from MNo
        - enregistrement BD
-       - envoi requete à App3 et reception de response  ***ici***
+       - envoi requete à App2 et reception de response  ***ici***
        - Formatage de la reponse pour le MNO
        - Envoi des reponses au MNO
 
@@ -123,3 +100,9 @@ App3 : MnoService : Integration de l'api de l'operateur mobile
 17/10/2026
 
    - revoir l'ordre et les variables dans postman 
+
+18/10/2026
+     securisation de jwt :   
+
+            -mettre en place un refresh token
+            -externaliser le jwt-secret

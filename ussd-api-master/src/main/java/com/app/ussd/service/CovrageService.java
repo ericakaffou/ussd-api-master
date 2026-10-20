@@ -6,9 +6,7 @@ package com.app.ussd.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.stereotype.Service;
-
 import com.app.ussd.exception.EntityNotFoundException;
 import com.app.ussd.exception.ErrorCodes;
 import com.app.ussd.exception.Exception;
@@ -23,7 +21,6 @@ import com.app.ussd.repository.ServiceCodeRepository;
 import com.app.ussd.service.CovrageService;
 import com.app.ussd.utils.Constants;
 import com.app.ussd.validator.CovrageValidator;
-
 import lombok.extern.slf4j.Slf4j;
 
 
