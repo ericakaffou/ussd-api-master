@@ -106,3 +106,8 @@ App3 : MnoService : Integration de l'api de l'operateur mobile
 
             -mettre en place un refresh token
             -externaliser le jwt-secret
+
+
+Inclusion de nouvelle variables :
+   covrageName :  "SC-sc_CC-countryCode_D"  ex "SC-122_CC-225_D" pour les dediceted /  "SC-sc_CC-countryCode_channel" ex : "SC-122_CC-225_1"  ok 
+   routeMnoName : "covrageName-mnoName" SC-122_CC-225_MTN-CI

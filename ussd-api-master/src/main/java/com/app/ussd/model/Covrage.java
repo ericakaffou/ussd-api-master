@@ -28,6 +28,8 @@ public class Covrage extends AbstractEntity  {
     @JoinColumn(name = "service_code_id")
 	private ServiceCode serviceCode;	
 	
+	private String covrageName;
+	
 	//utiiser pour partager le SC entre plusieurs User
 	private String  channel;	
 	

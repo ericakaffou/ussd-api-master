@@ -10,6 +10,7 @@ public interface CovrageRepository extends JpaRepository<Covrage, Long> {
 
 	
 	public List<Covrage> findByServiceCodeId(Long id);
+	public Optional<Covrage> findByCovrageName (String covrageName);
 	
 	public Optional<Covrage> findByServiceCodeIdAndChannel(Long id , String channel);
 	

@@ -8,7 +8,8 @@ import lombok.Data;
 public class CovrageDto {
 	
 	private Long id;
-	private Long serviceCodeId;		
+	private Long serviceCodeId;	
+	private String covrageName;	
 	private String  channel;	
 	
 	

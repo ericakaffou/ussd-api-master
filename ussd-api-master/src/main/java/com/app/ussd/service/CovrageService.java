@@ -69,7 +69,10 @@ public class CovrageService  {
 		    			if(dto.getId() != cov.getId()) {
 		    				throw new Exception(""+Constants.FAILED+" "+ErrorCodes.SERVICE_CODE_DEDICATED_ALREDAY_ASSIGNED+", SERVICE_CODE with id = "+ dto.getServiceCodeId() +" Dedicated Already Assigned");   			
 		    			}
-		    		 }		    		
+		    		 }
+					 //ex : "SC-122_CC-225_D"
+					 covrage.setCovrageName("SC-"+optionalServiceCode.get().getServiceCode()+"_"+"CC-"+optionalServiceCode.get().getCountry().getCountryCode()+"_D");
+					 		    		
 				 }
 		    	
 		    }else {   // Not dedicated 
@@ -79,7 +82,9 @@ public class CovrageService  {
 		    	Optional<Covrage> optionalCorvage = covrageRepo.findByServiceCodeIdAndChannel(dto.getServiceCodeId(), dto.getChannel());
 		    	if(!optionalCorvage.isEmpty()) {	    	
 					 throw new Exception(""+Constants.FAILED+" "+ErrorCodes.COVRAGE_ALREADY_EXIST+"");   
-				   }		    	
+				   }
+				//ex : "SC-122_CC-225_1"
+				covrage.setCovrageName("SC-"+optionalServiceCode.get().getServiceCode()+"_"+"CC-"+optionalServiceCode.get().getCountry().getCountryCode()+"_"+dto.getChannel()+"");		    	
 		    }
 		    covrage.setServiceCode(optionalServiceCode.get()); 
 	    	covrage.setChannel(dto.getChannel());
@@ -94,6 +99,19 @@ public class CovrageService  {
 			
 		   }
 		 	Optional<Covrage> optionalCovrage = covrageRepo.findById(id);
+		 	if(optionalCovrage.isEmpty()) {
+		 		throw new EntityNotFoundException(Constants.FAILED,ErrorCodes.COVRAGE_NOT_FOUND);
+		 	}
+		 	return this.toDto(optionalCovrage.get()); 
+	}	
+
+	//covrageName
+	public CovrageDto covrageName(String covrageName) {
+		if (covrageName == null) {
+			throw new Exception(Constants.ERROR,ErrorCodes.ID_NULL);
+			
+		   }
+		 	Optional<Covrage> optionalCovrage = covrageRepo.findByCovrageName(covrageName);
 		 	if(optionalCovrage.isEmpty()) {
 		 		throw new EntityNotFoundException(Constants.FAILED,ErrorCodes.COVRAGE_NOT_FOUND);
 		 	}
@@ -160,6 +178,7 @@ public class CovrageService  {
 	    	return CovrageDto.builder()
 	    			.id(covrage.getId())
 	    			.serviceCodeId(covrage.getServiceCode().getId())
+					.covrageName(covrage.getCovrageName())
 	    			.channel(covrage.getChannel())
 	    			.build() ;
 	    }
