@@ -18,8 +18,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 
 public class UssdService extends AbstractEntity {
-	
-	
+		
 	private String serviceName;	
 	
     // Relation  Service to account 	

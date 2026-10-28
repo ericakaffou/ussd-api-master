@@ -109,5 +109,8 @@ App3 : MnoService : Integration de l'api de l'operateur mobile
 
 
 Inclusion de nouvelle variables :
-   covrageName :  "SC-sc_CC-countryCode_D"  ex "SC-122_CC-225_D" pour les dediceted /  "SC-sc_CC-countryCode_channel" ex : "SC-122_CC-225_1"  ok 
-   routeMnoName : "covrageName-mnoName" SC-122_CC-225_MTN-CI
+   - covrageName :  "SC-sc_CC-countryCode_D"  ex "SC-122_CC-225_D" pour les dediceted /  "SC-sc_CC-countryCode_channel" ex : "SC-122_CC-225_1" : ok 
+   - routeMnoName : "covrageName_serviceName_mnoName" SC-122_CC-225_MTN-CI
+   - serviceName : "accountId_serviceName" ex : "1_MISS-CI"
+
+   Suppression de RouteMno

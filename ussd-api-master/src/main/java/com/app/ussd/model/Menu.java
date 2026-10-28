@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 public class Menu extends AbstractEntity{
 	
 	
-    private String text;       // Titre du Menu - contenu ????	
+    private String text;       // Titre du Menu - contenu 	
 	
     private Long nextMenuId;	/* For validation Menu oo indicate response menu.
                                 Cet Id est celui d'un menu de reponse.

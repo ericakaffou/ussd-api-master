@@ -69,7 +69,8 @@ public class UssdServiceService {
 		UssdService service = new UssdService();
 		service.setId(dto.getId()); // Tres important pour la modification
 		service.setAccount(optionalAccount.get());
-		service.setServiceName(dto.getServiceName());
+		// ex : "1_MISS-CI"
+		service.setServiceName(optionalAccount.get().getId()+"_"+dto.getServiceName());
 		service.setForwarded(dto.isForwarded());
 		service.setEnabled(dto.isEnabled());
 		

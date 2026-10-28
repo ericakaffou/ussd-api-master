@@ -10,7 +10,8 @@ public class RouteMnoDto {
 
 	
 	private Long id;
-    private Long covrageId;    
+    private Long covrageId;  
+	private String routeMnoName;  
     private String callBackUrl;		
 	private Long  serviceId;  
 	private Long mnoId;

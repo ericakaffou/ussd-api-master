@@ -30,6 +30,7 @@ public class RouteMno extends AbstractEntity {
 	@ManyToOne
     @JoinColumn(name = "covrage_id")
     private Covrage covrage;    
+    private String routeMnoName;
     private String callBackUrl;	///  Url to forward request to client (third party) 
     /*
      * il est préferable de garder cette propriété "callBackUrl" ici plutot que dans Service car chaque operateur a son modèle de donnée;
