@@ -21,17 +21,7 @@ public class Mno extends AbstractEntity {
 	private String mnc;
 	private String mnoName;
 	
-	//  Relation with Country 
-	/*
-	@ManyToOne
-    @JoinColumn(name = "country_id")
-    private Country country;  */
-	
-	// Relation with RouteMno 
-	@OneToMany(mappedBy = "mno") 
-	private List<RouteMno> routeMno;  
-		 
-		 
+	 
 		
 
 }

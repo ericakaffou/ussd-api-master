@@ -13,10 +13,8 @@ import com.app.ussd.exception.ErrorCodes;
 import com.app.ussd.exception.Exception;
 import com.app.ussd.exception.InvalidEntityException;
 import com.app.ussd.model.Mno;
-import com.app.ussd.model.RouteMno;
 import com.app.ussd.model.dto.MnoDto;
 import com.app.ussd.repository.MnoRepository;
-import com.app.ussd.repository.RouteMnoRepository;
 import com.app.ussd.utils.Constants;
 import com.app.ussd.validator.MnoValidator;
 
@@ -25,14 +23,14 @@ public class MnoService {
 	
 
 	 private final MnoRepository mnoRepo;
-	 private final RouteMnoRepository routeMnoRepo;
+	
 	 
 	 
 			
-	public MnoService(MnoRepository mnoRepo, RouteMnoRepository routeMnoRepo) {
+	public MnoService(MnoRepository mnoRepo) {
 		super();
 		this.mnoRepo = mnoRepo;
-		this.routeMnoRepo = routeMnoRepo;
+		
 	}
 
 	//Save
@@ -89,12 +87,12 @@ public class MnoService {
 		public void Delete(Long id) {
 			
 			MnoDto mno = this.FindById(id);
-			
+			/* 
 	    	    List<RouteMno> listMno = routeMnoRepo.findByMnoId(mno.getId());    	 
 	    	   	if (!listMno.isEmpty()) {
 		    		throw new Exception(Constants.FAILED,ErrorCodes.ROUTE_MNO_ALREADY_EXIST, "Delete All ROUTE_MNO linked before");
 				}
-	    	   			    	    	
+	    	 */  			    	    	
 		    	mnoRepo.deleteById(mno.getId());	
 		    	
 				    		     		

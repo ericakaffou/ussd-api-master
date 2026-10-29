@@ -12,11 +12,9 @@ import com.app.ussd.exception.ErrorCodes;
 import com.app.ussd.exception.Exception;
 import com.app.ussd.exception.InvalidEntityException;
 import com.app.ussd.model.Covrage;
-import com.app.ussd.model.RouteMno;
 import com.app.ussd.model.ServiceCode;
 import com.app.ussd.model.dto.CovrageDto;
 import com.app.ussd.repository.CovrageRepository;
-import com.app.ussd.repository.RouteMnoRepository;
 import com.app.ussd.repository.ServiceCodeRepository;
 import com.app.ussd.service.CovrageService;
 import com.app.ussd.utils.Constants;
@@ -30,16 +28,15 @@ public class CovrageService  {
 	
 	 private final CovrageRepository covrageRepo;
 	 private final  ServiceCodeRepository scRepo;
-	 private final RouteMnoRepository routeMnoRepo;
 	
 	
 	
-	public CovrageService(CovrageRepository covrageRepo, ServiceCodeRepository scRepo,
-			RouteMnoRepository routeMnoRepo) {
+	
+	public CovrageService(CovrageRepository covrageRepo, ServiceCodeRepository scRepo) {
 		super();
 		this.covrageRepo = covrageRepo;
 		this.scRepo = scRepo;
-		this.routeMnoRepo = routeMnoRepo;
+		
 	}
 	//Save
 	public CovrageDto Save(CovrageDto dto) throws java.lang.Exception {
@@ -155,18 +152,9 @@ public class CovrageService  {
 	//Delete 
 	public void Delete(Long id) {
 		
-		CovrageDto covrageDto = this.FindById(id); 	
-		
-		// Suppression des routeMno
-		List<RouteMno> listRouteMno = routeMnoRepo.findByCovrageId(id);
-		for (RouteMno routeMno : listRouteMno) {
-			routeMnoRepo.delete(routeMno);
-		}		
+		CovrageDto covrageDto = this.FindById(id);	
 		
 		covrageRepo.deleteById(covrageDto.getId());
-		
-		
-		
 	    }
 	
 	//Mapping de Covrage -> CovrageDto

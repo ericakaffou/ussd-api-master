@@ -32,14 +32,10 @@ public class Covrage extends AbstractEntity  {
 	
 	//utiiser pour partager le SC entre plusieurs User
 	private String  channel;	
-	
-	// Relation with RouteMNO 
-	@OneToMany(mappedBy = "covrage") 
-	private List<RouteMno> routeMno;
-	
-	
-	
-	
-	
+
+	// Relation with UssdService
+	@ManyToOne
+    @JoinColumn(name = "service_id")
+    private UssdService service ;
 	
 }
