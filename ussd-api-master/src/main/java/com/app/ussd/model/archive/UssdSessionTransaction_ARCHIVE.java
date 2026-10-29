@@ -6,7 +6,7 @@ import javax.persistence.ManyToOne;
 
 import com.app.ussd.exception.EntityNotFoundException;
 import com.app.ussd.exception.ErrorCodes;
-import com.app.ussd.model.AbstractEntity;
+import com.app.ussd.model.app.AbstractEntity;
 import com.app.ussd.model.dto.UssdSessionTransactionDto;
 import com.app.ussd.utils.Constants;
 

@@ -1,4 +1,4 @@
-package com.app.ussd.model;
+package com.app.ussd.model.app;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

@@ -1,4 +1,4 @@
-package com.app.ussd.model;
+package com.app.ussd.model.app;
 
 import java.util.List;
 

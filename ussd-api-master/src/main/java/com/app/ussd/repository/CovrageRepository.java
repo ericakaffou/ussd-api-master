@@ -3,7 +3,8 @@ package com.app.ussd.repository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.app.ussd.model.Covrage;
+
+import com.app.ussd.model.app.Covrage;
 
 
 public interface CovrageRepository extends JpaRepository<Covrage, Long> {
