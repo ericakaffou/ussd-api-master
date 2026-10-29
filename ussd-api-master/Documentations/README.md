@@ -113,3 +113,6 @@ Inclusion de nouvelle variables :
    - serviceName : "accountId_serviceName" ex : "1_MISS-CI" ok
 
    Suppression de RouteMno : en effet RouteMno aurait été utile si on pouvait router le traffic d'un mno A via un mno B ( ce qui n'est pas possible ici , bref j'ai voulu dupliquer le système sms mais pas possible)  : ok 
+
+
+   covrage : erreur nom pas creer

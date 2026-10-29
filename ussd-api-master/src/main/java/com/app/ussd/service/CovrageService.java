@@ -69,7 +69,7 @@ public class CovrageService  {
 			   }
 		   
 		    if (optionalServiceCode.get().isDedicated()) {	
-		    	
+		    	covrage.setCovrageName(optionalService.get().getServiceName()+"_SC-"+optionalServiceCode.get().getServiceCode()+"_"+"CC-"+optionalServiceCode.get().getCountry().getCountryCode()+"_D");
 		    	List<Covrage> listCovrage = covrageRepo.findByServiceCodeId(dto.getServiceCodeId());		    	
 		    	 if(!listCovrage.isEmpty()) {		    		 
 		    		 for (Covrage cov : listCovrage ) {		    			
@@ -77,24 +77,24 @@ public class CovrageService  {
 		    				throw new Exception(""+Constants.FAILED+" "+ErrorCodes.SERVICE_CODE_DEDICATED_ALREDAY_ASSIGNED+", SERVICE_CODE with id = "+ dto.getServiceCodeId() +" Dedicated Already Assigned");   			
 		    			}
 		    		 }
-					 //ex : "SC-122_CC-225_D_MISS-CI"
-					 covrage.setCovrageName("SV-"+optionalService.get().getServiceName()+"_SC-"+optionalServiceCode.get().getServiceCode()+"_"+"CC-"+optionalServiceCode.get().getCountry().getCountryCode()+"_D");
-					 		    		
+												  		
 				 }
 		    	
 		    }else {   // Not dedicated 
-		    	
+		    	//ex : "SC-122_CC-225_1"
+				covrage.setCovrageName(optionalService.get().getServiceName()+"_SC-"+optionalServiceCode.get().getServiceCode()+"_"+"CC-"+optionalServiceCode.get().getCountry().getCountryCode()+"_"+dto.getChannel()+"");
 		    	//findByServiceIdAndChannel
 		    	//Check si channel deja Existant
 		    	Optional<Covrage> optionalCorvage = covrageRepo.findByServiceCodeIdAndChannel(dto.getServiceCodeId(), dto.getChannel());
 		    	if(!optionalCorvage.isEmpty()) {	    	
 					 throw new Exception(""+Constants.FAILED+" "+ErrorCodes.COVRAGE_ALREADY_EXIST+"");   
 				   }
-				//ex : "SC-122_CC-225_1"
-				covrage.setCovrageName("SV-"+optionalService.get().getServiceName()+"_SC-"+optionalServiceCode.get().getServiceCode()+"_"+"CC-"+optionalServiceCode.get().getCountry().getCountryCode()+"_"+dto.getChannel()+"");		    	
+				
+						    	
 		    }
 		    covrage.setServiceCode(optionalServiceCode.get()); 
 	    	covrage.setChannel(dto.getChannel());
+				
 		    
 		  
 		return  this.toDto(covrageRepo.save(covrage));
