@@ -13,9 +13,11 @@ import com.app.ussd.exception.Exception;
 import com.app.ussd.exception.InvalidEntityException;
 import com.app.ussd.model.Covrage;
 import com.app.ussd.model.ServiceCode;
+import com.app.ussd.model.UssdService;
 import com.app.ussd.model.dto.CovrageDto;
 import com.app.ussd.repository.CovrageRepository;
 import com.app.ussd.repository.ServiceCodeRepository;
+import com.app.ussd.repository.ServiceRepository;
 import com.app.ussd.service.CovrageService;
 import com.app.ussd.utils.Constants;
 import com.app.ussd.validator.CovrageValidator;
@@ -28,14 +30,16 @@ public class CovrageService  {
 	
 	 private final CovrageRepository covrageRepo;
 	 private final  ServiceCodeRepository scRepo;
+	 private final  ServiceRepository serviceRepo;
 	
 	
 	
 	
-	public CovrageService(CovrageRepository covrageRepo, ServiceCodeRepository scRepo) {
+	public CovrageService(CovrageRepository covrageRepo, ServiceCodeRepository scRepo , ServiceRepository serviceRepo) {
 		super();
 		this.covrageRepo = covrageRepo;
 		this.scRepo = scRepo;
+		this.serviceRepo = serviceRepo;
 		
 	}
 	//Save
@@ -53,6 +57,12 @@ public class CovrageService  {
 		 */
 		 Covrage covrage = new Covrage();
 		    covrage.setId(dto.getId());
+			Optional<UssdService> optionalService = serviceRepo.findById(dto.getServiceId());
+			 if(optionalService.isEmpty()) {	    	
+				 throw new EntityNotFoundException(""+Constants.FAILED+" "+ErrorCodes.SERVICE_NOT_FOUND+", SERVICE with id = "+ dto.getServiceId() +" Not Found");   
+			   }
+			covrage.setService(optionalService.get());
+
 		    Optional<ServiceCode> optionalServiceCode = scRepo.findById(dto.getServiceCodeId());
 		    if(optionalServiceCode.isEmpty()) {	    	
 				 throw new EntityNotFoundException(""+Constants.FAILED+" "+ErrorCodes.SERVICE_CODE_NOT_FOUND+", SERVICE_CODE with id = "+ dto.getServiceCodeId() +" Not Found");   
@@ -67,8 +77,8 @@ public class CovrageService  {
 		    				throw new Exception(""+Constants.FAILED+" "+ErrorCodes.SERVICE_CODE_DEDICATED_ALREDAY_ASSIGNED+", SERVICE_CODE with id = "+ dto.getServiceCodeId() +" Dedicated Already Assigned");   			
 		    			}
 		    		 }
-					 //ex : "SC-122_CC-225_D"
-					 covrage.setCovrageName("SC-"+optionalServiceCode.get().getServiceCode()+"_"+"CC-"+optionalServiceCode.get().getCountry().getCountryCode()+"_D");
+					 //ex : "SC-122_CC-225_D_MISS-CI"
+					 covrage.setCovrageName("SV-"+optionalService.get().getServiceName()+"_SC-"+optionalServiceCode.get().getServiceCode()+"_"+"CC-"+optionalServiceCode.get().getCountry().getCountryCode()+"_D");
 					 		    		
 				 }
 		    	
@@ -81,7 +91,7 @@ public class CovrageService  {
 					 throw new Exception(""+Constants.FAILED+" "+ErrorCodes.COVRAGE_ALREADY_EXIST+"");   
 				   }
 				//ex : "SC-122_CC-225_1"
-				covrage.setCovrageName("SC-"+optionalServiceCode.get().getServiceCode()+"_"+"CC-"+optionalServiceCode.get().getCountry().getCountryCode()+"_"+dto.getChannel()+"");		    	
+				covrage.setCovrageName("SV-"+optionalService.get().getServiceName()+"_SC-"+optionalServiceCode.get().getServiceCode()+"_"+"CC-"+optionalServiceCode.get().getCountry().getCountryCode()+"_"+dto.getChannel()+"");		    	
 		    }
 		    covrage.setServiceCode(optionalServiceCode.get()); 
 	    	covrage.setChannel(dto.getChannel());
@@ -167,6 +177,7 @@ public class CovrageService  {
 	    			.id(covrage.getId())
 	    			.serviceCodeId(covrage.getServiceCode().getId())
 					.covrageName(covrage.getCovrageName())
+					.serviceId(covrage.getService().getId())
 	    			.channel(covrage.getChannel())
 	    			.build() ;
 	    }

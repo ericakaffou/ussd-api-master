@@ -23,8 +23,10 @@ public class ServiceValidator {
 		}		
 		
 		if(dto.getAccountId() == null) {
-			errors.add("euillez entrer le Compte Client" );
-		}			
+			errors.add("Veuillez entrer le Compte Client" );
+		}
+
+		
 		
 		return errors;
 	}

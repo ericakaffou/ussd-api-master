@@ -20,6 +20,10 @@ public class CovrageValidator {
 		if(dto.getServiceCodeId() == null) {
 			errors.add("Veuillez entrer le serviceCode" );
 		}	
+
+		if(dto.getServiceId() == null) {
+			errors.add("Veuillez entrer le serviceId" );
+		}
 			
 		
 		return errors;
