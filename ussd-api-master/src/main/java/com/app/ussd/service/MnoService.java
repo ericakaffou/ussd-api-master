@@ -40,7 +40,7 @@ public class MnoService {
 			 throw new InvalidEntityException (Constants.ERROR,ErrorCodes.MNO_NOT_VALID, errors);
 		}
 		
-		Optional <Mno> optionalMno = mnoRepo.findByMccAndMncAndMnoName(dto.getMcc(), dto.getMnc(), dto.getMnoName()) ;
+		Optional <Mno> optionalMno = mnoRepo.findByMnoNameAndCountry(dto.getMnoName() , dto.getCountyCode()) ;
 		if(!optionalMno.isEmpty()){
 			  throw new Exception (Constants.ERROR,ErrorCodes.MNO_ALREADY_EXIST);
 			  } 
@@ -48,9 +48,7 @@ public class MnoService {
 		 Mno scRegMno = new Mno();
 		    scRegMno.setId(dto.getId());
 		    scRegMno.setMnoName(dto.getMnoName());
-		    scRegMno.setMnc(dto.getMnc());
-		    scRegMno.setMcc(dto.getMcc());
-			return  this.toDto(mnoRepo.save(scRegMno));		    
+		    return  this.toDto(mnoRepo.save(scRegMno));		    
 	}	
 	
 	//FindById
@@ -108,10 +106,9 @@ public class MnoService {
 		    	}
 		    	
 		    	return MnoDto.builder()
-		    			.id(mno.getId())
-		    			.mcc(mno.getMcc())
-		    			.mnc(mno.getMnc())
+		    			.id(mno.getId())		    			
 		    			.mnoName(mno.getMnoName())
+						.countyCode(mno.getCountry().getCountryCode())
 		    			.build() ;
 		    }
 }

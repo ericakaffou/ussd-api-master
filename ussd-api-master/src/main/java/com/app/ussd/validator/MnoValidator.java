@@ -15,21 +15,17 @@ public class MnoValidator {
 		List<String> errors = new ArrayList<>();
 		
 		if(dto == null) {
-			errors.add("mno.mcc is null");
-			errors.add("mno.mnc is null");
-			errors.add("mnoName.mcc is null");
+			
+			errors.add("mnoName is null");
 						return errors;
 		}		
-		if(!StringUtils.hasLength(dto.getMcc())) {
-			errors.add("mno.mcc is null" );
-		}
 		
-		if(!StringUtils.hasLength(dto.getMnc())) {
-			errors.add("mno.mnc is null" );
-		}
 		
+		if(!StringUtils.hasLength(dto.getCountyCode())) {
+			errors.add("countyCode is null" );
+		}
 		if(!StringUtils.hasLength(dto.getMnoName())) {
-			errors.add("mnoName.mcc is null" );
+			errors.add("mnoName is null" );
 		}
 		
 		return errors;

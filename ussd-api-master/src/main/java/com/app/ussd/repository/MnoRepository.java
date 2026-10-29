@@ -7,6 +7,6 @@ import com.app.ussd.model.app.Mno;
 
 public interface MnoRepository  extends JpaRepository<Mno, Long> {
 	
-	public Optional <Mno> findByMccAndMncAndMnoName(String mcc , String mnc , String mnoName) ;
+	public Optional <Mno> findByMnoNameAndCountry(String mnoName  , String  countryCode) ;
 
 }
