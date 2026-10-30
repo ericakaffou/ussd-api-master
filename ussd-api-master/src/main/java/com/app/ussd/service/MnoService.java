@@ -85,12 +85,7 @@ public class MnoService {
 		public void Delete(Long id) {
 			
 			MnoDto mno = this.FindById(id);
-			/* 
-	    	    List<RouteMno> listMno = routeMnoRepo.findByMnoId(mno.getId());    	 
-	    	   	if (!listMno.isEmpty()) {
-		    		throw new Exception(Constants.FAILED,ErrorCodes.ROUTE_MNO_ALREADY_EXIST, "Delete All ROUTE_MNO linked before");
-				}
-	    	 */  			    	    	
+					    	    	
 		    	mnoRepo.deleteById(mno.getId());	
 		    	
 				    		     		
