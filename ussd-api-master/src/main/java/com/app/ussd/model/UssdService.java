@@ -34,6 +34,9 @@ public class UssdService extends AbstractEntity {
 	 different via une url differente    */
 	
 	private boolean forwarded;
+	private String serviceForwardedUrl ;
+
+	private String app2Url ;
 	
 	private boolean enabled ;	
 	

@@ -106,3 +106,7 @@ App3 : MnoService : Integration de l'api de l'operateur mobile
 
             -mettre en place un refresh token
             -externaliser le jwt-secret
+
+
+04/11/2026
+TODO : revoir  le validator de ussdService 
