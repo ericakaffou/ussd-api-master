@@ -12,9 +12,7 @@ public class UssdServiceDto {
 	private Long id;
 	private String serviceName;	    
     private Long accountId;	
-	private boolean forwarded;
-	private String serviceForwardedUrl ;
-	private String app2Url ;	
+	private boolean forwarded;	
 	private boolean enabled;
 	
 	
