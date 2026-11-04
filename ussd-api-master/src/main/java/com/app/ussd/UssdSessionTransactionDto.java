@@ -1,4 +1,4 @@
-package com.app.ussd.model.dto;
+package com.app.ussd;
 
 import com.app.ussd.model.app.UssdSessionTransaction;
 
