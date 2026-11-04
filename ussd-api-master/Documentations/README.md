@@ -106,3 +106,13 @@ App3 : MnoService : Integration de l'api de l'operateur mobile
 
             -mettre en place un refresh token
             -externaliser le jwt-secret
+
+
+Inclusion de nouvelle variables :
+   - covrageName :  "SV-ServiceName_SC-sc_CC-countryCode_D"  ex "1_SV-MISS-CI_SC-122_CC-225_D" pour les dediceted /  "SV-ServiceName_SC-sc_CC-countryCode_channel" ex : "1_SV-MISS-CI_SC-122_CC-225_1" : ok 
+   - serviceName : "accountId_serviceName" ex : "1_MISS-CI" ok
+
+   Suppression de RouteMno : en effet RouteMno aurait été utile si on pouvait router le traffic d'un mno A via un mno B ( ce qui n'est pas possible ici , bref j'ai voulu dupliquer le système sms mais pas possible)  : ok 
+
+
+revoir l'ajout de MNO : dto - MnoService - Mnorepo

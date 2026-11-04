@@ -31,9 +31,6 @@ public class UssdService extends AbstractEntity {
 	 Parametre utiliser pour transferer ou non les requetes au système du client.
 	*/	
 	private boolean forwarded;
-	private String serviceForwardedUrl ;
-
-	private String app2Url ;
 	
 	private boolean enabled ;	
 	
