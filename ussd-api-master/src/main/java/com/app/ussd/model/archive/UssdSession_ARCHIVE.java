@@ -6,8 +6,8 @@ import javax.persistence.OneToMany;
 
 import com.app.ussd.exception.EntityNotFoundException;
 import com.app.ussd.exception.ErrorCodes;
-import com.app.ussd.model.AbstractEntity;
-import com.app.ussd.model.UssdService;
+import com.app.ussd.model.app.AbstractEntity;
+import com.app.ussd.model.app.UssdService;
 import com.app.ussd.model.dto.UssdSessionDto;
 import com.app.ussd.utils.Constants;
 

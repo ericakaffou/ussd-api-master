@@ -3,7 +3,8 @@ package com.app.ussd.repository;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import com.app.ussd.model.ServiceCode;
+
+import com.app.ussd.model.app.ServiceCode;
 
 
 public interface ServiceCodeRepository extends JpaRepository<ServiceCode, Long> {

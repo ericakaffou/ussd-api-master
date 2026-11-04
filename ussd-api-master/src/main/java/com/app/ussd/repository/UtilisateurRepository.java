@@ -5,7 +5,8 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import com.app.ussd.model.Utilisateur;
+
+import com.app.ussd.model.app.Utilisateur;
 
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> {
 

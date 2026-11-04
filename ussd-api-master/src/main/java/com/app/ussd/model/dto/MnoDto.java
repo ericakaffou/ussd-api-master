@@ -8,10 +8,8 @@ import lombok.Data;
 public class MnoDto {
 	
 	private Long id;
-	private String mcc;
-	private String mnc;
 	private String mnoName;
-	private String[] params;  //
+	private String countyCode;  //
 	
 	
 }

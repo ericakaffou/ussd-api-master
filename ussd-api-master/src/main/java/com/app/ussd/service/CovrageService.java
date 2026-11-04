@@ -11,13 +11,13 @@ import com.app.ussd.exception.EntityNotFoundException;
 import com.app.ussd.exception.ErrorCodes;
 import com.app.ussd.exception.Exception;
 import com.app.ussd.exception.InvalidEntityException;
-import com.app.ussd.model.Covrage;
-import com.app.ussd.model.RouteMno;
-import com.app.ussd.model.ServiceCode;
+import com.app.ussd.model.app.Covrage;
+import com.app.ussd.model.app.ServiceCode;
+import com.app.ussd.model.app.UssdService;
 import com.app.ussd.model.dto.CovrageDto;
 import com.app.ussd.repository.CovrageRepository;
-import com.app.ussd.repository.RouteMnoRepository;
 import com.app.ussd.repository.ServiceCodeRepository;
+import com.app.ussd.repository.ServiceRepository;
 import com.app.ussd.service.CovrageService;
 import com.app.ussd.utils.Constants;
 import com.app.ussd.validator.CovrageValidator;
@@ -30,16 +30,17 @@ public class CovrageService  {
 	
 	 private final CovrageRepository covrageRepo;
 	 private final  ServiceCodeRepository scRepo;
-	 private final RouteMnoRepository routeMnoRepo;
+	 private final  ServiceRepository serviceRepo;
 	
 	
 	
-	public CovrageService(CovrageRepository covrageRepo, ServiceCodeRepository scRepo,
-			RouteMnoRepository routeMnoRepo) {
+	
+	public CovrageService(CovrageRepository covrageRepo, ServiceCodeRepository scRepo , ServiceRepository serviceRepo) {
 		super();
 		this.covrageRepo = covrageRepo;
 		this.scRepo = scRepo;
-		this.routeMnoRepo = routeMnoRepo;
+		this.serviceRepo = serviceRepo;
+		
 	}
 	//Save
 	public CovrageDto Save(CovrageDto dto) throws java.lang.Exception {
@@ -56,33 +57,44 @@ public class CovrageService  {
 		 */
 		 Covrage covrage = new Covrage();
 		    covrage.setId(dto.getId());
+			Optional<UssdService> optionalService = serviceRepo.findById(dto.getServiceId());
+			 if(optionalService.isEmpty()) {	    	
+				 throw new EntityNotFoundException(""+Constants.FAILED+" "+ErrorCodes.SERVICE_NOT_FOUND+", SERVICE with id = "+ dto.getServiceId() +" Not Found");   
+			   }
+			covrage.setService(optionalService.get());
+
 		    Optional<ServiceCode> optionalServiceCode = scRepo.findById(dto.getServiceCodeId());
 		    if(optionalServiceCode.isEmpty()) {	    	
 				 throw new EntityNotFoundException(""+Constants.FAILED+" "+ErrorCodes.SERVICE_CODE_NOT_FOUND+", SERVICE_CODE with id = "+ dto.getServiceCodeId() +" Not Found");   
 			   }
 		   
 		    if (optionalServiceCode.get().isDedicated()) {	
-		    	
+		    	covrage.setCovrageName(optionalService.get().getServiceName()+"_SC-"+optionalServiceCode.get().getServiceCode()+"_"+"CC-"+optionalServiceCode.get().getCountry().getCountryCode()+"_D");
 		    	List<Covrage> listCovrage = covrageRepo.findByServiceCodeId(dto.getServiceCodeId());		    	
 		    	 if(!listCovrage.isEmpty()) {		    		 
 		    		 for (Covrage cov : listCovrage ) {		    			
 		    			if(dto.getId() != cov.getId()) {
 		    				throw new Exception(""+Constants.FAILED+" "+ErrorCodes.SERVICE_CODE_DEDICATED_ALREDAY_ASSIGNED+", SERVICE_CODE with id = "+ dto.getServiceCodeId() +" Dedicated Already Assigned");   			
 		    			}
-		    		 }		    		
+		    		 }
+												  		
 				 }
 		    	
 		    }else {   // Not dedicated 
-		    	
+		    	//ex : "SC-122_CC-225_1"
+				covrage.setCovrageName(optionalService.get().getServiceName()+"_SC-"+optionalServiceCode.get().getServiceCode()+"_"+"CC-"+optionalServiceCode.get().getCountry().getCountryCode()+"_"+dto.getChannel()+"");
 		    	//findByServiceIdAndChannel
 		    	//Check si channel deja Existant
 		    	Optional<Covrage> optionalCorvage = covrageRepo.findByServiceCodeIdAndChannel(dto.getServiceCodeId(), dto.getChannel());
 		    	if(!optionalCorvage.isEmpty()) {	    	
 					 throw new Exception(""+Constants.FAILED+" "+ErrorCodes.COVRAGE_ALREADY_EXIST+"");   
-				   }		    	
+				   }
+				
+						    	
 		    }
 		    covrage.setServiceCode(optionalServiceCode.get()); 
 	    	covrage.setChannel(dto.getChannel());
+				
 		    
 		  
 		return  this.toDto(covrageRepo.save(covrage));
@@ -94,6 +106,19 @@ public class CovrageService  {
 			
 		   }
 		 	Optional<Covrage> optionalCovrage = covrageRepo.findById(id);
+		 	if(optionalCovrage.isEmpty()) {
+		 		throw new EntityNotFoundException(Constants.FAILED,ErrorCodes.COVRAGE_NOT_FOUND);
+		 	}
+		 	return this.toDto(optionalCovrage.get()); 
+	}	
+
+	//covrageName
+	public CovrageDto covrageName(String covrageName) {
+		if (covrageName == null) {
+			throw new Exception(Constants.ERROR,ErrorCodes.ID_NULL);
+			
+		   }
+		 	Optional<Covrage> optionalCovrage = covrageRepo.findByCovrageName(covrageName);
 		 	if(optionalCovrage.isEmpty()) {
 		 		throw new EntityNotFoundException(Constants.FAILED,ErrorCodes.COVRAGE_NOT_FOUND);
 		 	}
@@ -137,18 +162,9 @@ public class CovrageService  {
 	//Delete 
 	public void Delete(Long id) {
 		
-		CovrageDto covrageDto = this.FindById(id); 	
-		
-		// Suppression des routeMno
-		List<RouteMno> listRouteMno = routeMnoRepo.findByCovrageId(id);
-		for (RouteMno routeMno : listRouteMno) {
-			routeMnoRepo.delete(routeMno);
-		}		
+		CovrageDto covrageDto = this.FindById(id);	
 		
 		covrageRepo.deleteById(covrageDto.getId());
-		
-		
-		
 	    }
 	
 	//Mapping de Covrage -> CovrageDto
@@ -160,6 +176,8 @@ public class CovrageService  {
 	    	return CovrageDto.builder()
 	    			.id(covrage.getId())
 	    			.serviceCodeId(covrage.getServiceCode().getId())
+					.covrageName(covrage.getCovrageName())
+					.serviceId(covrage.getService().getId())
 	    			.channel(covrage.getChannel())
 	    			.build() ;
 	    }

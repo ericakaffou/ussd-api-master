@@ -15,9 +15,9 @@ import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.app.ussd.model.Account;
-import com.app.ussd.model.Roles;
-import com.app.ussd.model.Utilisateur;
+import com.app.ussd.model.app.Account;
+import com.app.ussd.model.app.Roles;
+import com.app.ussd.model.app.Utilisateur;
 import com.app.ussd.repository.AccountRepository;
 import com.app.ussd.repository.UtilisateurRepository;
 import com.app.ussd.service.RoleService;

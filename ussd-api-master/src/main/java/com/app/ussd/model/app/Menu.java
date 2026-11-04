@@ -1,4 +1,4 @@
-package com.app.ussd.model;
+package com.app.ussd.model.app;
 
 import java.util.List;
 import javax.persistence.Column;
@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,7 +22,7 @@ import lombok.NoArgsConstructor;
 public class Menu extends AbstractEntity{
 	
 	
-    private String text;       // Titre du Menu - contenu ????	
+    private String text;       // Titre du Menu - contenu 	
 	
     private Long nextMenuId;	/* For validation Menu oo indicate response menu.
                                 Cet Id est celui d'un menu de reponse.

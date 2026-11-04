@@ -1,10 +1,8 @@
-package com.app.ussd.model;
+package com.app.ussd.model.app;
 
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,21 +15,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Mno extends AbstractEntity {
 	
-	private String mcc;
-	private String mnc;
+	
 	private String mnoName;
 	
-	//  Relation with Country 
-	/*
+	// Relation with Country 
 	@ManyToOne
     @JoinColumn(name = "country_id")
-    private Country country;  */
-	
-	// Relation with RouteMno 
-	@OneToMany(mappedBy = "mno") 
-	private List<RouteMno> routeMno;  
-		 
-		 
+    private Country country; 
 		
 
 }

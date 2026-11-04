@@ -1,8 +1,9 @@
-package com.app.ussd.model;
+package com.app.ussd.model.app;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
