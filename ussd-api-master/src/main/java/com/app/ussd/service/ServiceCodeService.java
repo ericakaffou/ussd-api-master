@@ -22,11 +22,8 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class ServiceCodeService {
 
-	 private final ServiceCodeRepository scRepo;
-	
-	 private final CountryRepository countryRepo ;
-	
-	
+	 private final ServiceCodeRepository scRepo;	
+	 private final CountryRepository countryRepo ;	
 	
 	public ServiceCodeService(ServiceCodeRepository scRepo, CountryRepository countryRepo) {
 		super();
@@ -41,56 +38,62 @@ public class ServiceCodeService {
 		if(!errors.isEmpty()) {
 			 throw new InvalidEntityException (Constants.ERROR,ErrorCodes.SERVICE_CODE_NOT_VALID, errors);
 		}
-
 		// verifier le country_code ici
-		Optional<Country> optionalCountry = countryRepo.findByCountryCode(dto.getContry_code());
-
-		if (optionalCountry.isEmpty()) {
-
-			throw new Exception(Constants.ERROR, ErrorCodes.PAYS_CODE_NOT_VALID);
-		}
-		
-		
-		Optional<ServiceCode> optionalSC = scRepo.findServiceCodeForCountry(dto.getServiceCode() , dto.getContry_code() );
+		Country country = countryRepo.findByCountryCode(dto.getContry_code()).orElseThrow(() -> new Exception(Constants.ERROR, ErrorCodes.PAYS_CODE_NOT_VALID));
+				
+		Optional<ServiceCode> optionalSC = scRepo.findByServiceCodeAndCountry(dto.getServiceCode() , country );
 		if (optionalSC.isPresent()) {
 			throw new Exception(Constants.ERROR, ErrorCodes.SERVICE_CODE_ALREADY_EXIST);
-		}
-		
-		
-		
+		}		
 	 	ServiceCode serviceCode = new ServiceCode();
 	    serviceCode.setServiceCode(dto.getServiceCode());
 	    serviceCode.setDedicated(dto.isDedicated());
-	    serviceCode.setCountry(optionalCountry.get());
-		return  this.toDto(scRepo.save(serviceCode));
-		    
+	    serviceCode.setCountry(country);
+		return  this.toDto(scRepo.save(serviceCode));		    
+	}
+
+	//Update
+	public ServiceCodeDto Update(ServiceCodeDto dto) {
+		if (dto.getId() == null) {
+			throw new Exception(Constants.ERROR,ErrorCodes.ID_NULL);			
+		   }	
+				
+		ServiceCode sc = scRepo.findById(dto.getId()).orElseThrow(() -> new EntityNotFoundException (Constants.FAILED,ErrorCodes.SERVICE_CODE_NOT_FOUND) );
+		List<String> errors = ServiceCodeValidator.validate(dto);
+		if(!errors.isEmpty()) {
+			 throw new InvalidEntityException (Constants.ERROR,ErrorCodes.SERVICE_CODE_NOT_VALID, errors);
+		}
+		// verifier le country_code ici
+		Country country = countryRepo.findByCountryCode(dto.getContry_code()).orElseThrow(() -> new Exception(Constants.ERROR, ErrorCodes.PAYS_CODE_NOT_VALID));
+				
+		Optional<ServiceCode> optionalSC = scRepo.findByServiceCodeAndCountryAndIdNot(dto.getServiceCode() , country , dto.getId() );
+		if (optionalSC.isPresent()) {
+			throw new Exception(Constants.ERROR, ErrorCodes.SERVICE_CODE_ALREADY_EXIST);
+		}		
+	 	
+	    sc.setServiceCode(dto.getServiceCode());
+	    sc.setDedicated(dto.isDedicated());
+	    sc.setCountry(country);
+		return  this.toDto(scRepo.save(sc));		    
 	}
 	
 	//findById
 	public ServiceCodeDto FindById (Long id) {
 		if (id == null) {
 			throw new Exception(Constants.ERROR,ErrorCodes.ID_NULL);			
-		   }
-		
-		 Optional<ServiceCode> optionalSc = scRepo.findById(id);
-		 if(optionalSc.isEmpty()) {
-			 throw new EntityNotFoundException (Constants.FAILED,ErrorCodes.SERVICE_CODE_NOT_FOUND);
-		 }
-		
-		 return 	this.toDto(optionalSc.get()); 
+		   }		
+		 ServiceCode sc = scRepo.findById(id).orElseThrow(() -> new EntityNotFoundException (Constants.FAILED,ErrorCodes.SERVICE_CODE_NOT_FOUND) );
+		 return 	this.toDto(sc); 
 	}
 	
 	//findByServiceCode
 		public ServiceCodeDto FindByServiceCode (Long serviceCode) {
 			if (serviceCode == null) {
 				throw new Exception(Constants.ERROR,ErrorCodes.SERVICE_CODE_NULL);			
-			   }			
-			 Optional<ServiceCode> optionalSc = scRepo.findByServiceCode(serviceCode);
-			 if(optionalSc.isEmpty()) {
-				 throw new EntityNotFoundException (Constants.FAILED,ErrorCodes.SERVICE_CODE_NOT_FOUND);
-			 }
-			
-			 return 	this.toDto(optionalSc.get()); 
+			   }	
+			ServiceCode sc = scRepo.findByServiceCode(serviceCode).orElseThrow(() -> new EntityNotFoundException (Constants.FAILED,ErrorCodes.SERVICE_CODE_NOT_FOUND) );
+		 	
+			 return 	this.toDto(sc); 
 		}
 	
 	// ListAll
@@ -114,20 +117,15 @@ public class ServiceCodeService {
 		
 		//check and get Route		
 		ServiceCodeDto serviceCode = this.FindById(id);				
-		scRepo.deleteById(serviceCode.getId());
-		
-		
+		scRepo.deleteById(serviceCode.getId());		
 	}
-	
-	
 	
 	// Mapping de Account -> AccountDto
     public  ServiceCodeDto toDto(ServiceCode serviceCode) {
     	
     	if (serviceCode == null) {    		
     		throw new EntityNotFoundException (Constants.FAILED,ErrorCodes.SERVICE_CODE_NOT_FOUND);
-    	}
-    	
+    	}    	
     	return ServiceCodeDto.builder()
     			.id(serviceCode.getId())
     			.serviceCode(serviceCode.getServiceCode())

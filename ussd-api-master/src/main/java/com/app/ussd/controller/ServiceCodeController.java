@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,6 +52,17 @@ public class ServiceCodeController {
 		})
 		public ServiceCodeDto Save(@RequestBody ServiceCodeDto dto) {
 			return scService.Save(dto);
+		}
+
+	  @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('SUPADMIN')")
+	  @PutMapping(value ="/" , consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE )
+	  @ApiOperation(value = "Enregistrer Ou Modifier un Service Code" , notes = "cette methode permet d'enregistrer Ou Modifier un Service Code" , response = ServiceCodeDto.class) 
+	  @ApiResponses(value = {
+				 @ApiResponse(code = 200 , message = "l'objet ServiceCode Modifié "),
+				 @ApiResponse(code = 400 , message = "l'objet ServiceCode n'est pas valide")
+		})
+		public ServiceCodeDto Update(@RequestBody ServiceCodeDto dto) {
+			return scService.Update(dto);
 		}
 	  
 	  	//FindById

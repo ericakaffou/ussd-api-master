@@ -63,10 +63,9 @@ public class CovrageService  {
 			covrage.setService(service);
 
 			ServiceCode serviceCode = scRepo.findById(dto.getServiceCodeId()).orElseThrow(() ->
-			new EntityNotFoundException(""+Constants.FAILED+" "+ErrorCodes.SERVICE_CODE_NOT_FOUND+", SERVICE_CODE with id = "+ dto.getServiceCodeId() +" Not Found"));
-
-		   
-		    if (serviceCode.isDedicated()) {	
+			new EntityNotFoundException(""+Constants.FAILED+" "+ErrorCodes.SERVICE_CODE_NOT_FOUND+", SERVICE_CODE with id = "+ dto.getServiceCodeId() +" Not Found"));				   
+		    
+			if (serviceCode.isDedicated()) {	
 		    	covrage.setCovrageName(service.getServiceName()+"_SC-"+serviceCode.getServiceCode()+"_"+"CC-"+serviceCode.getCountry().getCountryCode()+"_D");
 		    	List<Covrage> listCovrage = covrageRepo.findByServiceCodeId(dto.getServiceCodeId());		    	
 		    	 if(!listCovrage.isEmpty()) {		    		 
@@ -95,6 +94,58 @@ public class CovrageService  {
 		  
 		return  this.toDto(covrageRepo.save(covrage));
 	}
+
+
+	//Update
+	public CovrageDto Update(CovrageDto dto) throws java.lang.Exception {
+
+		Covrage covrage = covrageRepo.findById(dto.getId()).orElseThrow(() -> new EntityNotFoundException(Constants.ERROR ,ErrorCodes.COVRAGE_NOT_FOUND));
+		
+		List<String> errors = CovrageValidator.validate(dto);	
+		
+		if(!errors.isEmpty()) {
+			 throw new InvalidEntityException (Constants.ERROR,ErrorCodes.COVRAGE_NOT_VALID, errors);
+		}
+		
+			UssdService service = serviceRepo.findById(dto.getServiceId()).orElseThrow(() -> 
+			new EntityNotFoundException(""+Constants.FAILED+" "+ErrorCodes.SERVICE_NOT_FOUND+", SERVICE with id = "+ dto.getServiceId() +" Not Found"));
+
+			covrage.setService(service);
+
+			ServiceCode serviceCode = scRepo.findById(dto.getServiceCodeId()).orElseThrow(() ->
+			new EntityNotFoundException(""+Constants.FAILED+" "+ErrorCodes.SERVICE_CODE_NOT_FOUND+", SERVICE_CODE with id = "+ dto.getServiceCodeId() +" Not Found"));				   
+		    
+			if (serviceCode.isDedicated()) {	
+		    	covrage.setCovrageName(service.getServiceName()+"_SC-"+serviceCode.getServiceCode()+"_"+"CC-"+serviceCode.getCountry().getCountryCode()+"_D");
+		    	List<Covrage> listCovrage = covrageRepo.findByServiceCodeId(dto.getServiceCodeId());		    	
+		    	 if(!listCovrage.isEmpty()) {		    		 
+		    		 for (Covrage cov : listCovrage ) {		    			
+		    			if(dto.getId() != cov.getId()) {
+		    				throw new Exception(""+Constants.FAILED+" "+ErrorCodes.SERVICE_CODE_DEDICATED_ALREDAY_ASSIGNED+", SERVICE_CODE with id = "+ dto.getServiceCodeId() +" Dedicated Already Assigned");   			
+		    			}
+		    		 }
+												  		
+				 }
+		    	
+		    }else {   // Not dedicated 
+		    	//ex : "SC-122_CC-225_1"
+				covrage.setCovrageName(service.getServiceName()+"_SC-"+serviceCode.getServiceCode()+"_"+"CC-"+serviceCode.getCountry().getCountryCode()+"_"+dto.getChannel()+"");
+		    	//findByServiceIdAndChannel
+		    	//Check si channel deja Existant
+		    	Optional<Covrage> optionalCorvage = covrageRepo.findByServiceCodeIdAndChannel(dto.getServiceCodeId(), dto.getChannel());
+		    	if(!optionalCorvage.isEmpty()) {	    	
+					 throw new Exception(""+Constants.FAILED+" "+ErrorCodes.COVRAGE_ALREADY_EXIST+"");   
+				   }		
+						    	
+		    }
+		    covrage.setServiceCode(serviceCode); 
+	    	covrage.setChannel(dto.getChannel());		
+		    
+		  
+		return  this.toDto(covrageRepo.save(covrage));
+	}
+
+
 	//FindById
 	public CovrageDto FindById(Long id) {
 		if (id == null) {

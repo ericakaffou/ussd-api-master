@@ -53,31 +53,51 @@ public class UssdServiceService {
 			 throw new InvalidEntityException (Constants.ERROR,ErrorCodes.SERVICE_NOT_VALID, errors);
 		}
 		// check if Accountd is ok
-		Optional<Account> optionalAccount = accountRepo.findById(dto.getAccountId());	
-	 	
-	 	if(optionalAccount.isEmpty()) {
-			 throw new EntityNotFoundException (Constants.FAILED,ErrorCodes.ACCOUNT_NOT_FOUND);
-		}
-	 	
-	 	
+		Account account = accountRepo.findById(dto.getAccountId()).orElseThrow(() -> new EntityNotFoundException (Constants.FAILED,ErrorCodes.ACCOUNT_NOT_FOUND));
+			 	
 	    // check if Service already exist 
-	 	Optional<UssdService> optionalUssdService = serviceRepo.findByServiceNameAndAccount(dto.getServiceName(), optionalAccount.get() );
+	 	Optional<UssdService> optionalUssdService = serviceRepo.findByServiceNameAndAccount(dto.getServiceName(), account );
 	 	if(!optionalUssdService.isEmpty()) {
 			 throw new Exception (Constants.ERROR,ErrorCodes.SERVICE_ALREADY_EXIST);
 		}
 	 	
 		UssdService service = new UssdService();
 		service.setId(dto.getId()); // Tres important pour la modification
-		service.setAccount(optionalAccount.get());
+		service.setAccount(account);
 		// ex : "1_MISS-CI"
-		service.setServiceName(optionalAccount.get().getId()+"_"+dto.getServiceName());
+		service.setServiceName(account.getId()+"_"+dto.getServiceName());
 		service.setForwarded(dto.isForwarded());
-		service.setEnabled(dto.isEnabled());
-		
-		return  this.toDto(serviceRepo.save(service));
-		
-		
+		service.setEnabled(dto.isEnabled());		
+		return  this.toDto(serviceRepo.save(service));		
 		    
+	}
+
+	//Update
+	public UssdServiceDto Update(UssdServiceDto dto) throws java.lang.Exception {
+
+		if (dto.getId() == null) {
+			throw new Exception(Constants.ERROR,ErrorCodes.ID_NULL);			
+		   }
+		UssdService service = serviceRepo.findById(dto.getId()).orElseThrow(() -> new EntityNotFoundException (Constants.FAILED,ErrorCodes.SERVICE_NOT_FOUND));
+		
+		List<String> errors = ServiceValidator.validate(dto);		
+		if(!errors.isEmpty()) {
+			 throw new InvalidEntityException (Constants.ERROR,ErrorCodes.SERVICE_NOT_VALID, errors);
+		}
+		// check if Accountd is ok
+		Account account = accountRepo.findById(dto.getAccountId()).orElseThrow(() -> new EntityNotFoundException (Constants.FAILED,ErrorCodes.ACCOUNT_NOT_FOUND));
+			 	
+	    // check if Service already exist 
+	 	Optional<UssdService> optionalUssdService = serviceRepo.findByServiceNameAndAccount(dto.getServiceName(), account );
+	 	if(!optionalUssdService.isEmpty()) {
+			 throw new Exception (Constants.ERROR,ErrorCodes.SERVICE_ALREADY_EXIST);
+		}	 	
+		service.setAccount(account);
+		// ex : "1_MISS-CI"
+		service.setServiceName(account.getId()+"_"+dto.getServiceName());
+		service.setForwarded(dto.isForwarded());
+		service.setEnabled(dto.isEnabled());		
+		return  this.toDto(serviceRepo.save(service));		    
 	}
 	
 	//FindById
@@ -85,12 +105,8 @@ public class UssdServiceService {
 		if (id == null) {
 			throw new Exception(Constants.ERROR,ErrorCodes.ID_NULL);			
 		   }
-		
-		 Optional<UssdService> optionalService = serviceRepo.findById(id);
-		 if(optionalService.isEmpty()) {
-			 throw new EntityNotFoundException (Constants.FAILED,ErrorCodes.SERVICE_NOT_FOUND);
-		 } 
-				 return 	this.toDto(optionalService.get()); 
+		UssdService service =  serviceRepo.findById(id).orElseThrow(() -> new EntityNotFoundException (Constants.FAILED,ErrorCodes.SERVICE_NOT_FOUND));
+		return 	this.toDto(service); 
 	}
 
 	

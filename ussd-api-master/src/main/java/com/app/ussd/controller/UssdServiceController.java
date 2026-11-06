@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,6 +47,16 @@ public class UssdServiceController {
 			 @ApiResponse(code = 400 , message = "l'objet service n'est pas valide")
 	})	public UssdServiceDto Save(@RequestBody UssdServiceDto dto) throws Exception {
 		return ussdService.Save(dto);
+
+	}
+
+	@PutMapping(value ="/" , consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE )
+	@ApiOperation(value = "Enregistrer Ou Modifier un service" , notes = "cette methode permet d'Enregistrer Ou Modifier  un service" , response = UssdServiceDto.class) 
+	@ApiResponses(value = {
+			 @ApiResponse(code = 200 , message = "l'objet service  modifié "),
+			 @ApiResponse(code = 400 , message = "l'objet service n'est pas valide")
+	})	public UssdServiceDto Update(@RequestBody UssdServiceDto dto) throws Exception {
+		return ussdService.Update(dto);
 
 	}
 	
