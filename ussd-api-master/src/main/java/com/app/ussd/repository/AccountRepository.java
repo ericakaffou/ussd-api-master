@@ -9,7 +9,9 @@ import com.app.ussd.model.app.Account;
 
 public interface AccountRepository extends JpaRepository<Account, Long>{
 	
-	public Optional<Account> findByAccountName (String accountName);	
+	 Optional<Account> findByAccountName (String accountName);	
+
+	  Optional<Account> findByAccountNameAndIdNot (String accountName ,Long id);	
 	
 	
 }

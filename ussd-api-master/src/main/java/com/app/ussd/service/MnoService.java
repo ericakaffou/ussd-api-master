@@ -57,6 +57,7 @@ public class MnoService {
 		    return  this.toDto(mnoRepo.save(scRegMno));		    
 	}	
 
+	//update
 	public MnoDto Update(MnoDto dto) {
 
 		Mno mno = mnoRepo.findById(dto.getId()).orElseThrow(() -> new Exception(Constants.ERROR,ErrorCodes.MNO_NOT_FOUND));

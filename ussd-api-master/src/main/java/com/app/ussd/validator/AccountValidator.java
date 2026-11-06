@@ -28,6 +28,10 @@ public class AccountValidator {
 		if(!dto.getEmail().matches(REGEX_EMAIL)) {
 			errors.add("Veuillez entrer un email correct" );
 		}
+
+		if(!StringUtils.hasLength(dto.getPassword())) {
+			errors.add("Veuillez entrer un mot de passe" );
+		}
 			
 		
 		return errors;

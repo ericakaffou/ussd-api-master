@@ -55,11 +55,7 @@ public class AccountService  {
 		this.roleService = roleService;
 	}
 
-
-
-
-
-	//Save &Edit
+	//Save 
 	public AccountDto Save(AccountDto dto) {
 		
 		List<String> errors = AccountValidator.validate(dto);
@@ -71,8 +67,7 @@ public class AccountService  {
 		 Optional<Account> optionalAccount = accountRepo.findByAccountName(dto.getAccountName());
 	      if( optionalAccount.isPresent()){
 			  throw new Exception (Constants.FAILED,ErrorCodes.ACCOUNT_ALREADY_EXIST);
-			  } 
-		
+			  } 		
 		
 		 Optional<Utilisateur> optionalUser = userRepo.findByUsername(dto.getEmail());
 	      if( optionalUser.isPresent()){
@@ -88,24 +83,71 @@ public class AccountService  {
 	    
 	    AccountDto savedAccount = this.toDto(accountRepo.save(account));
 	    
-	      Utilisateur newUser = new Utilisateur();
-		  newUser.setAccount(account);
-		  newUser.setUsername(account.getEmail());
-		  //Encodage du mot de passe 
-		  BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		  String passwordHash = encoder.encode(dto.getPassword());
-		  newUser.setPassword(passwordHash);		 
+		Utilisateur newUser = new Utilisateur();
+		newUser.setAccount(account);
+		newUser.setUsername(account.getEmail());
+		//Encodage du mot de passe 
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String passwordHash = encoder.encode(dto.getPassword());
+		newUser.setPassword(passwordHash);		 
+		
+		// Add role ADMIN to NEW User  
+		Set<Roles> roles = new HashSet<>();		  
+		Roles role = roleService.findByName("ADMIN");
+		roles.add(role);				
+		newUser.setRoles(roles);
+		newUser.setEnabled(dto.isEnabled());	
+		userRepo.save(newUser);
 		  
-		  // Add role ADMIN to NEW User  
-		  Set<Roles> roles = new HashSet<>();		  
-		  Roles role = roleService.findByName("ADMIN");
-		  roles.add(role);				
-		  newUser.setRoles(roles);
-		  newUser.setEnabled(dto.isEnabled());	
-		  userRepo.save(newUser);
+		  
+		return  savedAccount;
+		   
+	}	
+
+	public AccountDto Update(AccountDto dto) {
+		
+
+		Account account = accountRepo.findById(dto.getId()).orElseThrow(() -> new Exception (Constants.FAILED,ErrorCodes.ACCOUNT_NOT_FOUND));
+		
+		Utilisateur user = userRepo.findByUsername(account.getEmail()).orElseThrow(() -> new Exception (Constants.FAILED,ErrorCodes.USER_NOT_FOUND));
+		List<String> errors = AccountValidator.validate(dto);
+		
+		if(!errors.isEmpty()) {
+			 throw new InvalidEntityException (Constants.ERROR,ErrorCodes.ACCOUNT_NOT_VALID, errors);
+		}
+		
+		 Optional<Account> optionalAccount = accountRepo.findByAccountNameAndIdNot(dto.getAccountName() , dto.getId());
+	      if( optionalAccount.isPresent()){
+			  throw new Exception (Constants.FAILED,ErrorCodes.ACCOUNT_ALREADY_EXIST);
+			  } 		
+		
+	    /* verifier si le email du compte est identique au dto.email 
+		si different : modifier le user*/
+		
+		if(!account.getEmail().equals(dto.getEmail())){
+
+			 Optional<Utilisateur> optionalUser = userRepo.findByUsername(dto.getEmail());
+	      if( optionalUser.isPresent()){
+			  throw new Exception (Constants.ERROR,ErrorCodes.EMAIL_ALREADY_EXIST);
+			  } 
+			  user.setUsername(dto.getEmail());
+			  account.setEmail(dto.getEmail());
+		
+		} 
+		account.setAccountName(dto.getAccountName());	   
+	    account.setEnabled(dto.isEnabled());
+	    AccountDto savedAccount = this.toDto(accountRepo.save(account));
+	   		
+		//Encodage du mot de passe 
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String passwordHash = encoder.encode(dto.getPassword());
+		user.setPassword(passwordHash);				
+	
+		user.setEnabled(dto.isEnabled());	
+		userRepo.save(user); 
 		  
 		  
-		  return  savedAccount;
+		return  savedAccount;
 		   
 	}	
 	

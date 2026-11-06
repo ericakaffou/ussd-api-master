@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,7 +38,7 @@ public class AccountController  {
 		this.accountService = accountService;
 	}
 
-	//Save &Edit
+	//Save
 	@PostMapping(value = "/" , consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE )
 	@ApiOperation(value = "Enregistrer Ou Modifier un Account" , notes = "cette methode permet d'enregistrer  Ou Modifier  un Account" , response = AccountDto.class) 
 	@ApiResponses(value = {
@@ -46,6 +47,16 @@ public class AccountController  {
 	})	public AccountDto Save(@RequestBody AccountDto dto) {
 		
 		return accountService.Save(dto);
+	}
+	//Update
+	@PutMapping(value = "/" , consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE )
+	@ApiOperation(value = "Enregistrer Ou Modifier un Account" , notes = "cette methode permet d'enregistrer  Ou Modifier  un Account" , response = AccountDto.class) 
+	@ApiResponses(value = {
+			 @ApiResponse(code = 200 , message = "l'objet Account Cree/Modifié "),
+			 @ApiResponse(code = 400 , message = "l'objet Account n'est pas valide")
+	})	public AccountDto Update(@RequestBody AccountDto dto) {
+		
+		return accountService.Update(dto);
 	}
 
 	//FindById
