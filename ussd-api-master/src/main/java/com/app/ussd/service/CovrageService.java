@@ -57,19 +57,17 @@ public class CovrageService  {
 		 */
 		 Covrage covrage = new Covrage();
 		    covrage.setId(dto.getId());
-			Optional<UssdService> optionalService = serviceRepo.findById(dto.getServiceId());
-			 if(optionalService.isEmpty()) {	    	
-				 throw new EntityNotFoundException(""+Constants.FAILED+" "+ErrorCodes.SERVICE_NOT_FOUND+", SERVICE with id = "+ dto.getServiceId() +" Not Found");   
-			   }
-			covrage.setService(optionalService.get());
+			UssdService service = serviceRepo.findById(dto.getServiceId()).orElseThrow(() -> 
+			new EntityNotFoundException(""+Constants.FAILED+" "+ErrorCodes.SERVICE_NOT_FOUND+", SERVICE with id = "+ dto.getServiceId() +" Not Found"));
 
-		    Optional<ServiceCode> optionalServiceCode = scRepo.findById(dto.getServiceCodeId());
-		    if(optionalServiceCode.isEmpty()) {	    	
-				 throw new EntityNotFoundException(""+Constants.FAILED+" "+ErrorCodes.SERVICE_CODE_NOT_FOUND+", SERVICE_CODE with id = "+ dto.getServiceCodeId() +" Not Found");   
-			   }
+			covrage.setService(service);
+
+			ServiceCode serviceCode = scRepo.findById(dto.getServiceCodeId()).orElseThrow(() ->
+			new EntityNotFoundException(""+Constants.FAILED+" "+ErrorCodes.SERVICE_CODE_NOT_FOUND+", SERVICE_CODE with id = "+ dto.getServiceCodeId() +" Not Found"));
+
 		   
-		    if (optionalServiceCode.get().isDedicated()) {	
-		    	covrage.setCovrageName(optionalService.get().getServiceName()+"_SC-"+optionalServiceCode.get().getServiceCode()+"_"+"CC-"+optionalServiceCode.get().getCountry().getCountryCode()+"_D");
+		    if (serviceCode.isDedicated()) {	
+		    	covrage.setCovrageName(service.getServiceName()+"_SC-"+serviceCode.getServiceCode()+"_"+"CC-"+serviceCode.getCountry().getCountryCode()+"_D");
 		    	List<Covrage> listCovrage = covrageRepo.findByServiceCodeId(dto.getServiceCodeId());		    	
 		    	 if(!listCovrage.isEmpty()) {		    		 
 		    		 for (Covrage cov : listCovrage ) {		    			
@@ -82,19 +80,17 @@ public class CovrageService  {
 		    	
 		    }else {   // Not dedicated 
 		    	//ex : "SC-122_CC-225_1"
-				covrage.setCovrageName(optionalService.get().getServiceName()+"_SC-"+optionalServiceCode.get().getServiceCode()+"_"+"CC-"+optionalServiceCode.get().getCountry().getCountryCode()+"_"+dto.getChannel()+"");
+				covrage.setCovrageName(service.getServiceName()+"_SC-"+serviceCode.getServiceCode()+"_"+"CC-"+serviceCode.getCountry().getCountryCode()+"_"+dto.getChannel()+"");
 		    	//findByServiceIdAndChannel
 		    	//Check si channel deja Existant
 		    	Optional<Covrage> optionalCorvage = covrageRepo.findByServiceCodeIdAndChannel(dto.getServiceCodeId(), dto.getChannel());
 		    	if(!optionalCorvage.isEmpty()) {	    	
 					 throw new Exception(""+Constants.FAILED+" "+ErrorCodes.COVRAGE_ALREADY_EXIST+"");   
-				   }
-				
+				   }		
 						    	
 		    }
-		    covrage.setServiceCode(optionalServiceCode.get()); 
-	    	covrage.setChannel(dto.getChannel());
-				
+		    covrage.setServiceCode(serviceCode); 
+	    	covrage.setChannel(dto.getChannel());		
 		    
 		  
 		return  this.toDto(covrageRepo.save(covrage));
@@ -105,24 +101,22 @@ public class CovrageService  {
 			throw new Exception(Constants.ERROR,ErrorCodes.ID_NULL);
 			
 		   }
-		 	Optional<Covrage> optionalCovrage = covrageRepo.findById(id);
-		 	if(optionalCovrage.isEmpty()) {
-		 		throw new EntityNotFoundException(Constants.FAILED,ErrorCodes.COVRAGE_NOT_FOUND);
-		 	}
-		 	return this.toDto(optionalCovrage.get()); 
+		   Covrage covrage = covrageRepo.findById(id).orElseThrow(() ->
+		   new EntityNotFoundException(Constants.FAILED,ErrorCodes.COVRAGE_NOT_FOUND));
+		 	
+		 	return this.toDto(covrage); 
 	}	
 
 	//covrageName
 	public CovrageDto covrageName(String covrageName) {
 		if (covrageName == null) {
-			throw new Exception(Constants.ERROR,ErrorCodes.ID_NULL);
-			
+			throw new Exception(Constants.ERROR,ErrorCodes.ID_NULL);			
 		   }
-		 	Optional<Covrage> optionalCovrage = covrageRepo.findByCovrageName(covrageName);
-		 	if(optionalCovrage.isEmpty()) {
-		 		throw new EntityNotFoundException(Constants.FAILED,ErrorCodes.COVRAGE_NOT_FOUND);
-		 	}
-		 	return this.toDto(optionalCovrage.get()); 
+
+		   Covrage covrage =  covrageRepo.findByCovrageName(covrageName).orElseThrow(() ->
+		   new EntityNotFoundException(Constants.FAILED,ErrorCodes.COVRAGE_NOT_FOUND));
+
+		 	return this.toDto(covrage); 
 	}	
 	
 	

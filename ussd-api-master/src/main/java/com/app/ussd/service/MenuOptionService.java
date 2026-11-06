@@ -23,11 +23,9 @@ import com.app.ussd.validator.MenuOptionValidator;
 public class MenuOptionService {
 	
 	 private final  MenuOptionRepository menuOptionRepo;
-	 private final  MenuRepository menuRepo;	
+	 private final  MenuRepository menuRepo;
 	 
-	 
-	
-	public MenuOptionService(MenuOptionRepository menuOptionRepo, MenuRepository menuRepo) {
+	 public MenuOptionService(MenuOptionRepository menuOptionRepo, MenuRepository menuRepo) {
 		super();
 		this.menuOptionRepo = menuOptionRepo;
 		this.menuRepo = menuRepo;
@@ -41,11 +39,9 @@ public class MenuOptionService {
 		}
 		
 		 //Check and get menu
-		 Optional<Menu> optionalMenu = menuRepo.findById(dto.getMenuId());		 
-		 if(optionalMenu.isEmpty()) {
-			 throw new EntityNotFoundException (Constants.FAILED,ErrorCodes.MENU_NOT_FOUND," Menu with id = "+ dto.getMenuId() +"Not Found");
-		
-		   }
+		 Menu menu = menuRepo.findById(dto.getMenuId()).orElseThrow(() ->
+		 new EntityNotFoundException (Constants.FAILED,ErrorCodes.MENU_NOT_FOUND," Menu with id = "+ dto.getMenuId() +"Not Found"));
+		 
 		 
 		 //Check Exist menuOption
 		 Optional<MenuOption> optionalMenuOption = menuOptionRepo.findByPostionNumber(dto.getPostionNumber());
@@ -57,7 +53,7 @@ public class MenuOptionService {
 		MenuOption option = new MenuOption();
 		option.setId(dto.getId());
 		option.setLabel(dto.getLabel());
-		option.setMenu(optionalMenu.get());
+		option.setMenu(menu);
 		option.setNextMenuId(dto.getNextMenuId());
 		option.setNextOption(dto.isNextOption());
 		option.setPostionNumber(dto.getPostionNumber());
