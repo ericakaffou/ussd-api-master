@@ -19,7 +19,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Covrage extends AbstractEntity  {
 	
-	
 	@ManyToOne
     @JoinColumn(name = "service_code_id")
 	private ServiceCode serviceCode;	
