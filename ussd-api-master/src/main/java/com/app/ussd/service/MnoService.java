@@ -12,8 +12,10 @@ import com.app.ussd.exception.EntityNotFoundException;
 import com.app.ussd.exception.ErrorCodes;
 import com.app.ussd.exception.Exception;
 import com.app.ussd.exception.InvalidEntityException;
+import com.app.ussd.model.app.Country;
 import com.app.ussd.model.app.Mno;
 import com.app.ussd.model.dto.MnoDto;
+import com.app.ussd.repository.CountryRepository;
 import com.app.ussd.repository.MnoRepository;
 import com.app.ussd.utils.Constants;
 import com.app.ussd.validator.MnoValidator;
@@ -23,13 +25,14 @@ public class MnoService {
 	
 
 	 private final MnoRepository mnoRepo;
-	
+	private final CountryRepository countryRepo;
 	 
 	 
 			
-	public MnoService(MnoRepository mnoRepo) {
+	public MnoService(MnoRepository mnoRepo, CountryRepository countryRepo) {
 		super();
 		this.mnoRepo = mnoRepo;
+		this.countryRepo = countryRepo;
 		
 	}
 
@@ -44,10 +47,15 @@ public class MnoService {
 		if(!optionalMno.isEmpty()){
 			  throw new Exception (Constants.ERROR,ErrorCodes.MNO_ALREADY_EXIST);
 			  } 
+		Optional <Country> optionalcountry = countryRepo.findByCountryCode(dto.getCountyCode()) ;
+		if(!optionalcountry.isEmpty()){
+			  throw new Exception (Constants.ERROR,ErrorCodes.COUNRTY_NOT_FOUND);
+			  } 
+		
 		
 		 Mno scRegMno = new Mno();
-		    scRegMno.setId(dto.getId());
-		    scRegMno.setMnoName(dto.getMnoName());
+		    scRegMno.setCountry(optionalcountry.get());
+		 	scRegMno.setMnoName(dto.getMnoName());
 		    return  this.toDto(mnoRepo.save(scRegMno));		    
 	}	
 	

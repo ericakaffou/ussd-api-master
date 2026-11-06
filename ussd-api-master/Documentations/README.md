@@ -116,3 +116,22 @@ Inclusion de nouvelle variables :
 
 
 revoir l'ajout de MNO : dto - MnoService - Mnorepo
+
+faire une fonction update dans tous les services et controlleur
+ // UPDATE
+    @PutMapping("/{id}")
+    public Utilisateur update(
+            @PathVariable Long id,
+            @RequestBody Utilisateur utilisateur) {
+
+        utilisateur.setId(id);
+        return utilisateurService.save(utilisateur);
+    }
+Attention : pour une application robuste, il faut vérifier que l'utilisateur existe avant de faire l'UPDATE.
+// UPDATE
+Utilisateur utilisateur = utilisateurRepository.findById(1L)
+        .orElseThrow(() -> new RuntimeException("Utilisateur introuvable"));
+
+utilisateur.setNom("Eric Ak");
+
+utilisateurService.save(utilisateur);
