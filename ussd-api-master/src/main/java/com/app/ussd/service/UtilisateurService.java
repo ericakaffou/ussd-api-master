@@ -45,8 +45,9 @@ public class UtilisateurService {
 			 throw new InvalidEntityException (Constants.ERROR,ErrorCodes.USER_NOT_VALID, errors);
 		}
 		
+		
 		 Optional<Account> optionalAcount = accountRepo.findById(dto.getAccountId());
-		 if( !optionalAcount.isPresent()){
+		 if(optionalAcount.isEmpty()){
 			  throw new InvalidEntityException (Constants.ERROR,ErrorCodes.ACCOUNT_NOT_FOUND);
 			  }  
 		 
