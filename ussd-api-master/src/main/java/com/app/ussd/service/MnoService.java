@@ -42,21 +42,43 @@ public class MnoService {
 		if(!errors.isEmpty()) {
 			 throw new InvalidEntityException (Constants.ERROR,ErrorCodes.MNO_NOT_VALID, errors);
 		}
-		
-		Optional <Mno> optionalMno = mnoRepo.findByMnoNameAndCountry(dto.getMnoName() , dto.getCountyCode()) ;
-		if(!optionalMno.isEmpty()){
+
+		Country country = countryRepo.findByCountryCode(dto.getCountyCode()).orElseThrow(() ->  new Exception (Constants.ERROR,ErrorCodes.COUNRTY_NOT_FOUND));
+
+		Optional <Mno> optionalMno = mnoRepo.findByMnoNameAndCountry(dto.getMnoName() , country) ;
+		if(optionalMno.isPresent()){
 			  throw new Exception (Constants.ERROR,ErrorCodes.MNO_ALREADY_EXIST);
 			  } 
-		Optional <Country> optionalcountry = countryRepo.findByCountryCode(dto.getCountyCode()) ;
-		if(!optionalcountry.isEmpty()){
-			  throw new Exception (Constants.ERROR,ErrorCodes.COUNRTY_NOT_FOUND);
-			  } 
-		
+			
 		
 		 Mno scRegMno = new Mno();
-		    scRegMno.setCountry(optionalcountry.get());
+		    scRegMno.setCountry(country);
 		 	scRegMno.setMnoName(dto.getMnoName());
 		    return  this.toDto(mnoRepo.save(scRegMno));		    
+	}	
+
+	public MnoDto Update(MnoDto dto) {
+
+		Mno mno = mnoRepo.findById(dto.getId()).orElseThrow(() -> new Exception(Constants.ERROR,ErrorCodes.MNO_NOT_FOUND));
+					
+		List<String> errors = MnoValidator.validate(dto);		
+		if(!errors.isEmpty()) {
+			 throw new InvalidEntityException (Constants.ERROR,ErrorCodes.MNO_NOT_VALID, errors);
+		}
+
+		Country country = countryRepo.findByCountryCode(dto.getCountyCode()).orElseThrow(() ->  new Exception (Constants.ERROR,ErrorCodes.COUNRTY_NOT_FOUND));
+
+		
+		// exclure le mno en court
+		Optional <Mno> checkMno = mnoRepo.findByMnoNameAndCountryAndIdNot(dto.getMnoName() , country , dto.getId()) ;
+		if(checkMno.isPresent()){
+			  throw new Exception (Constants.ERROR,ErrorCodes.MNO_ALREADY_EXIST);
+			  } 
+			  
+		
+		    mno.setCountry(country);
+		 	mno.setMnoName(dto.getMnoName());
+		    return  this.toDto(mnoRepo.save(mno));		    
 	}	
 	
 	//FindById
@@ -64,13 +86,10 @@ public class MnoService {
 			if (id == null) {
 				throw new Exception(Constants.ERROR,ErrorCodes.ID_NULL);			
 			   }
-			 	Optional<Mno> optionalMno = mnoRepo.findById(id);	
+			 	Mno mno = mnoRepo.findById(id).orElseThrow(() -> new EntityNotFoundException (Constants.FAILED,ErrorCodes.MNO_NOT_FOUND));	
+			 	 	
 			 	
-			 	if(optionalMno.isEmpty()) {
-					 throw new EntityNotFoundException (Constants.FAILED,ErrorCodes.MNO_NOT_FOUND);
-				}
-			 	
-			 	return 	this.toDto(optionalMno.get()); 
+			 	return 	this.toDto(mno); 
 				
 		}
 	
