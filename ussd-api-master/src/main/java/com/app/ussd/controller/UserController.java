@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,6 +49,18 @@ public class UserController {
 			 @ApiResponse(code = 400 , message = "l'objet user n'est pas valide")
 	})	public UserDto Save(@RequestBody  UserDto dto) throws Exception  {
 		return utilisateurService.Save(dto);
+
+	}
+
+	//Save
+	//@PreAuthorize("hasRole('ADMIN')")
+	@PutMapping(value ="/" , consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE )
+	@ApiOperation(value = "Enregistrer  Ou Modifier un user" , notes = "cette methode permet d'enregistrer Ou Modifier  un user" , response = UserDto.class) 
+	@ApiResponses(value = {
+			 @ApiResponse(code = 200 , message = "l'objet user cree/Modifié "),
+			 @ApiResponse(code = 400 , message = "l'objet user n'est pas valide")
+	})	public UserDto Update(@RequestBody  UserDto dto) throws Exception  {
+		return utilisateurService.Update(dto);
 
 	}
 	

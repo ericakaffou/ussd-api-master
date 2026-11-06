@@ -45,19 +45,15 @@ public class UtilisateurService {
 			 throw new InvalidEntityException (Constants.ERROR,ErrorCodes.USER_NOT_VALID, errors);
 		}
 		
+		Account account = accountRepo.findById(dto.getAccountId()).orElseThrow(() -> new InvalidEntityException (Constants.ERROR,ErrorCodes.ACCOUNT_NOT_FOUND) );
 		
-		 Optional<Account> optionalAcount = accountRepo.findById(dto.getAccountId());
-		 if(optionalAcount.isEmpty()){
-			  throw new InvalidEntityException (Constants.ERROR,ErrorCodes.ACCOUNT_NOT_FOUND);
-			  }  
-		 
 		 Optional<Utilisateur> optionalUser = userRepo.findByUsername(dto.getUsername());
 	      if( optionalUser.isPresent()){
 			  throw new Exception (Constants.ERROR,ErrorCodes.USER_EXIST);
 			  } 
 		
 	      Utilisateur newUser = new Utilisateur();
-		  newUser.setAccount(optionalAcount.get());
+		  newUser.setAccount(account);
 		  newUser.setUsername(dto.getUsername());
 		  //Encodage du mot de passe 
 		  BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -77,6 +73,51 @@ public class UtilisateurService {
 			}
 		  newUser.setRoles(roles);			 
 		  return  this.toDto(userRepo.save(newUser));	
+		
+		    
+	}
+
+	//update 
+	public UserDto Update(UserDto dto) throws java.lang.Exception {
+		if (dto.getId() == null) {
+			throw new Exception(Constants.ERROR,ErrorCodes.ID_NULL);			
+		   }
+
+		Utilisateur user = userRepo.findById(dto.getId()).orElseThrow(() -> new EntityNotFoundException (Constants.FAILED,ErrorCodes.USER_NOT_FOUND));
+		List<String> errors = UserValidator.validate(dto);
+		
+		if(!errors.isEmpty()) {
+			 throw new InvalidEntityException (Constants.ERROR,ErrorCodes.USER_NOT_VALID, errors);
+		}
+		
+		Account account = accountRepo.findById(dto.getAccountId()).orElseThrow(() -> new InvalidEntityException (Constants.ERROR,ErrorCodes.ACCOUNT_NOT_FOUND) );
+		
+		 Optional<Utilisateur> optionalUser = userRepo.findByUsernameAndIdNot(dto.getUsername() , dto.getId());
+	      if( optionalUser.isPresent()){
+			  throw new Exception (Constants.ERROR,ErrorCodes.USER_EXIST);
+			  } 
+		
+	     
+		  user.setAccount(account);
+		  user.setUsername(dto.getUsername());
+		  //Encodage du mot de passe 
+		  BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		  String passwordHash = encoder.encode(dto.getPassword());
+		  user.setPassword(passwordHash);
+		  user.setEnabled(dto.isEnabled());
+		  
+		
+		  // Add role to User  
+		  Set<Roles> roles = new HashSet<>();
+		  for( String  rol : dto.getRoles() ) {
+			 Optional <Roles> optionalRole = roleRepo.findByRoleName(rol);
+			 if( optionalRole.isEmpty()){
+			  throw new InvalidEntityException (Constants.ERROR,ErrorCodes.ROLE_NOT_VALID);
+			  }			 
+			  roles.add(optionalRole.get());		
+			}
+		  user.setRoles(roles);			 
+		  return  this.toDto(userRepo.save(user));	
 		
 		    
 	}
